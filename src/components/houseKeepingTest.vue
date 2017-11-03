@@ -658,16 +658,17 @@
     -moz-animation: waterAnimate 3s infinite;
     -webkit-animation: waterAnimate 3s infinite;
     -o-animation: waterAnimate 3s infinite;
-    z-index: 1;
+    z-index: 2;
   }
 
   .goldicon {
     background: url("../../static/assets/goldcoin.png") no-repeat;
     background-size: 100% 100%;
+
     width: 169rem/@rem;
     height: 169rem/@rem;
     position: absolute;
-    left: 280rem/@rem;
+    left: 330rem/@rem;
     top: 79rem/@rem;
     z-index: 2;
 
@@ -723,72 +724,72 @@
     ul {
       list-style: none;
       line-height: 30rem/@rem;
-      padding: 8rem/@rem 15rem/@rem;
-    }
-    li {
-      background: url("/static/assets/unselected.png") no-repeat left center;
-      background-size: 10% auto;
-      width: 80%;
-      height: 20rem/@rem;
-      margin: 40rem/@rem 0;
-      padding: 20rem/@rem 25rem/@rem;
-      text-align: left;
-      vertical-align: middle;
-
-      &:before {
+      padding: 0rem/@rem 15rem/@rem;
+      li {
         background: url("/static/assets/unselected.png") no-repeat left center;
-        background-size: 10% auto;
-        padding: 0 20rem/@rem;
-        width: 20rem/@rem;
-        height: 20rem/@rem;
-      }
-      &.active {
-        display: block;
-        background: url("/static/assets/selected.png") no-repeat left center;
         background-size: 10% auto;
         width: 80%;
         height: 20rem/@rem;
-        margin: 40rem/@rem 0;
+        margin: 40rem/@rem 0 50rem/@rem 0;
         padding: 20rem/@rem 25rem/@rem;
-      }
-      &.columnStyle {
-        background: url("/static/assets/unselected.png") no-repeat left center;
-        background-size: 18% auto;
-        width: 40%;
+        text-align: left;
+        vertical-align: middle;
 
-        height: 20rem/@rem;
-        margin: 40rem/@rem 0;
-        padding: 25rem/@rem 20rem/@rem;
-        float: left;
+        &:before {
+          background: url("/static/assets/unselected.png") no-repeat left center;
+          background-size: 10% auto;
+          padding: 0 20rem/@rem;
+          width: 20rem/@rem;
+          height: 20rem/@rem;
+        }
         &.active {
           display: block;
           background: url("/static/assets/selected.png") no-repeat left center;
+          background-size: 10% auto;
+          width: 80%;
+          height: 20rem/@rem;
+          margin: 40rem/@rem 0 50rem/@rem 0;
+          padding: 20rem/@rem 25rem/@rem;
+        }
+        &.columnStyle {
+          background: url("/static/assets/unselected.png") no-repeat left center;
           background-size: 18% auto;
           width: 40%;
           height: 20rem/@rem;
-          margin: 40rem/@rem 0;
+          margin: 15rem/@rem 0rem/@rem;
           padding: 25rem/@rem 20rem/@rem;
+          float: left;
+          &.active {
+            background: url("/static/assets/selected.png") no-repeat left center;
+            background-size: 18% auto;
+            width: 40%;
+            height: 20rem/@rem;
+            margin: 15rem/@rem 0rem/@rem;
+            padding: 25rem/@rem 20rem/@rem;
+            float: left;
+          }
         }
-      }
-      img {
-        line-height: 30rem/@rem;
-        width: 120rem/@rem;
-        margin-left: 65rem/@rem;
-        margin-top: -20rem/@rem;
-      }
-      p {
-        width: 100%;
-        padding: 0 40rem/@rem;
-        margin-top: -3px;
-        line-height: 35rem/@rem;
-        &.columnStyle {
+        img {
+          line-height: 30rem/@rem;
+          width: 180rem/@rem;
+          margin-left: 65rem/@rem;
+          margin-top: -20rem/@rem;
+        }
+        p {
           width: 100%;
-          text-align: center;
-          padding: 0rem/@rem;
-          line-height: 0.74666667rem;
+          padding: 0 40rem/@rem;
+          margin-top: -3px;
+          line-height: 35rem/@rem;
+          &.columnStyle {
+            width: 100%;
+            text-align: center;
+            padding: 0rem/@rem 20rem/@rem;
+            line-height: 0.74666667rem;
+          }
         }
       }
     }
+
   }
 
   .testPage_bottom {
@@ -921,14 +922,6 @@
   }
 
   /*动画区*/
-  .c100500 {
-    transform: translate(-50%, -50%);
-    animation: change 5s;
-    -moz-animation: change 5s;
-    -webkit-animation: change 5s;
-    -o-animation: change 5s;
-  }
-
   @keyframes change {
     from {
       width: 100px;
@@ -943,14 +936,14 @@
   }
 
   @keyframes waterAnimate {
-    0% {
+    20% {
       background: url("../../static/assets/water_1.png") no-repeat;
       background-size: 100% 100%;
       width: 442rem/@rem;
       height: 895rem/@rem;
       z-index: 1;
     }
-    50% {
+    70% {
       background: url("../../static/assets/water_2.png") no-repeat;
       background-size: 100% 100%;
       width: 442rem/@rem;
@@ -1082,13 +1075,17 @@
   }
 
   @keyframes goldicon {
-    0% {
+    10% {
       background: url("../../static/assets/goldcoin.png") no-repeat;
       background-size: 100% 100%;
+
       width: 169rem/@rem;
       height: 169rem/@rem;
-      left: 300rem/@rem;
-      top: 80rem/@rem;
+      position: absolute;
+      left: 330rem/@rem;
+      top: 79rem/@rem;
+      z-index: 2;
+
       transform: rotate(0deg);
       -ms-transform: rotate(0deg); /* IE 9 */
       -moz-transform: rotate(0deg); /* Firefox */
@@ -1101,8 +1098,10 @@
       background-size: 100% 100%;
       width: 169rem/@rem;
       height: 169rem/@rem;
-      left: 300rem/@rem;
-      top: 80rem/@rem;
+      position: absolute;
+      left: 330rem/@rem;
+      top: 79rem/@rem;
+      z-index: 2;
 
       transform: rotate(360deg);
       -ms-transform: rotate(360deg); /* IE 9 */
