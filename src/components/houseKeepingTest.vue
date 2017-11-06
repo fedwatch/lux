@@ -27,7 +27,7 @@
         <div class="goldicon"></div>
       </div>
 
-      <div class="testPage_body" style="position: absolute;z-index:5;">
+      <div class="testPage_body">
         <div v-for="(t,index) in test" v-show="currentTest == t.id" class="mainTest" style="">
           <div class="question">
             <p><span class="qNumber">{{index + 1}}、</span>{{t.qTitle}}</p>
@@ -41,7 +41,10 @@
                   v-if="!t.imgData && d.title && !t.columnStyle"
                   :data-score=d.score
                   @click="recordScore(d.score,key,d.selected,currentTest)">
-                <p><span>{{d.icon}}.</span> {{d.title}} </p>
+                <p>
+                  <span class="icon">{{d.icon}}.</span>
+                  <span class="desc">{{d.title}}</span>
+                </p>
               </li>
 
               <li :class='{active:d.selected === true}' v-for="(d,key,index) in t.a" v-if="t.imgData  && !t.columnStyle"
@@ -55,7 +58,10 @@
                   v-if="t.imgData && t.columnStyle"
                   :data-score=d.score
                   @click="recordScore(d.score,key,d.selected,currentTest)">
-                <p class="columnStyle"><span>{{d.icon}}.</span> {{d.title}} </p>
+                <p class="columnStyle">
+                  <span class="icon">{{d.icon}}.</span>
+                  <span class="desc">{{d.title}}</span>
+                </p>
               </li>
             </ul>
 
@@ -124,6 +130,7 @@
   //  import appShare  from "../../static/utils/appShare";
   //  require("");
   //  require("/static/utils/resetRem");
+  //  import $ from 'node_modules/dom7'
 
   export default {
     name: 'HouseKeepingTest',
@@ -145,7 +152,7 @@
             id: 0,
             imgData: true,
             columnStyle: false,
-            qTitle: "品酒（装X）大会上，你碰到了许久未见的薇薇安，眼尖的你一眼就看出她身上的这件是A货",
+            qTitle: "品酒（装X）大会上，你碰到了许久未见的薇薇安，眼尖的你一眼就看出她身上的这件是A货:",
             qImg: "",
             a: [
               {icon: "A", title: "爱马仕 logo 图", img: "/static/images/Hermes.jpg", score: 10, selected: false},
@@ -158,7 +165,7 @@
             id: 1,
             columnStyle: true,
             imgData: true,
-            qTitle: "凯莉四处炫耀最近新买的包包，但是竟然连品牌名都读错了，机智的你知道它念",
+            qTitle: "凯莉四处炫耀最近新买的包包，但是竟然连品牌名都读错了，机智的你知道它念:",
             qImg: "/static/images/q2.png",
             a: [
               {icon: "A", title: "梵哲希", img: "", score: 6, selected: false},
@@ -171,7 +178,7 @@
             id: 2,
             imgData: false,
             columnStyle: false,
-            qTitle: "终于迎来已久的休假，和亲爱的TA约定去普吉岛度假，TA说你来安排住宿，你会选",
+            qTitle: "终于迎来已久的休假，和亲爱的TA约定去普吉岛度假，TA说你来安排住宿，你会选:",
             qImg: "",
             a: [
               {icon: "A", title: "难得度假，当然选超五星了", img: "", score: 10, selected: false},
@@ -184,7 +191,7 @@
             id: 3,
             imgData: false,
             columnStyle: false,
-            qTitle: "你的同事小明想买iphone8，想问你要不要一起买，你回答",
+            qTitle: "你的同事小明想买iphone8，想问你要不要一起买，你回答:",
             qImg: "",
             a: [
               {icon: "A", title: "劳资已经预约了iPhone X", img: "", score: 10, selected: false},
@@ -197,7 +204,7 @@
             id: 4,
             imgData: false,
             columnStyle: false,
-            qTitle: "又到了一月一度的工资日，看着进账的工资，你在想",
+            qTitle: "又到了一月一度的工资日，看着进账的工资，你在想:",
             qImg: "",
             a: [
               {icon: "A", title: "还完信用卡，这个月又要吃土了", img: "", score: 10, selected: false},
@@ -210,7 +217,7 @@
             id: 5,
             imgData: false,
             columnStyle: false,
-            qTitle: "又到了秋冬换季时，整理完衣柜的你想",
+            qTitle: "又到了秋冬换季时，整理完衣柜的你想:",
             qImg: "",
             a: [
               {icon: "A", title: "去年的衣服都过时了，全部扔掉换成最新款", img: "", score: 10, selected: false},
@@ -223,7 +230,7 @@
             id: 6,
             imgData: true,
             columnStyle: false,
-            qTitle: "恰逢去巴黎出差，女朋友千叮咛万嘱咐要一只“姨妈色”的口红，所以你选了",
+            qTitle: "恰逢去巴黎出差，女朋友千叮咛万嘱咐要一只“姨妈色”的口红，所以你选了:",
             qImg: "",
             a: [
               {icon: "A", title: "", img: "/static/images/u114.jpg", score: 6, selected: false},
@@ -236,7 +243,7 @@
             id: 7,
             imgData: false,
             columnStyle: false,
-            qTitle: "TA来挑选结婚当天的礼服，营业员热情地拿出四款不同档次的礼服，你选择了",
+            qTitle: "即将举办婚礼的你和TA来挑选结婚当天的礼服，营业员热情地拿出四款不同档次的礼服，你选择了:",
             qImg: "",
             a: [
               {icon: "A", title: "买下高级定制礼服，日后留个纪念", img: "", score: 10, selected: false},
@@ -382,6 +389,18 @@
     mounted: function () {
       console.log("mounted")
       rem.resetRem();
+      var ua = rem.myBrowser();
+//      alert(ua)
+      if (ua == "Safari") {
+        $(".ask").css("margin", "2.77333rem");
+        $(".girl").css("top", " 11.09333333rem");
+        $(".share").hide();
+        $(".testPage_body").css("margin", "1.70667rem 1.06667rem");
+        $(".goldicon").css("top", "0.64rem");
+        $(".water").css("top", "0rem");
+      } else if (ua == "wxApp") {
+        $(".hkr_body").css("top", "2.77333rem");
+      }
       this.PlayState = true;
 
 //      appShare('shareBtn', { //H5按钮的分享
@@ -393,6 +412,8 @@
 //        shareTypes: ['weixinFriends', 'QQFriends']
 //      })
 
+//      share
+      console.log()
 
       // 微信配置
       wx.config({
@@ -457,6 +478,10 @@
     font-style: normal;
   }
 
+  a, img, button, input, textarea, ul, li {
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  }
+
   * {
     margin: 0;
     padding: 0;
@@ -487,8 +512,8 @@
     height: 59rem/@rem;
 
     position: absolute;
-    top: 10rem/@rem;
-    right: 10rem/@rem;
+    top: 20rem/@rem;
+    right: 20rem/@rem;
 
     &.start {
       animation: rotateMotion 2s infinite;
@@ -504,8 +529,8 @@
       height: 54rem/@rem;
 
       position: absolute;
-      top: 15rem/@rem;
-      right: 15rem/@rem;
+      top: 20rem/@rem;
+      right: 20rem/@rem;
     }
 
   }
@@ -554,9 +579,11 @@
 
     .bigTitle {
       background: url("../../static/assets/bigTitle.png") no-repeat;
-      background-size: 100% 100%;
+      background-size: 100% 95%;
+      /*width: 667rem/@rem;*/
       width: 667rem/@rem;
       height: 480rem/@rem;
+
       /*   margin: 10rem/@rem auto;*/
 
       position: absolute;
@@ -577,7 +604,8 @@
       height: 150rem/@rem;
 
       position: absolute;
-      top: 571rem/@rem;
+      /*top: 571rem/@rem;*/
+      top: 520rem/@rem;
       left: 150rem/@rem;
 
       /*  margin-left: 175rem/@rem;
@@ -588,7 +616,6 @@
     .ask {
       width: 508rem/@rem;
       height: 126rem/@rem;
-
       text-align: center;
       margin: 155rem/@rem auto;
       /*     position: absolute;
@@ -656,19 +683,19 @@
   }
 
   .water {
-    background: url("../../static/assets/water_1.png") no-repeat;
+    background: url("../../static/assets/water.gif") no-repeat;
     background-size: 100% 100%;
-    width: 442rem/@rem;
-    height: 895rem/@rem;
+    width: 155rem/@rem;
+    height: 733rem/@rem;
 
     position: absolute;
-    top: 0rem/@rem;
-    left: 0rem/@rem;
+    top: 55rem/@rem;
+    left: 10rem/@rem;
 
-    animation: waterAnimate 3s infinite;
-    -moz-animation: waterAnimate 3s infinite;
-    -webkit-animation: waterAnimate 3s infinite;
-    -o-animation: waterAnimate 3s infinite;
+    /*  animation: waterAnimate 3s infinite;
+      -moz-animation: waterAnimate 3s infinite;
+      -webkit-animation: waterAnimate 3s infinite;
+      -o-animation: waterAnimate 3s infinite;*/
     z-index: 2;
   }
 
@@ -681,7 +708,8 @@
 
     position: absolute;
     left: 330rem/@rem;
-    top: 160rem/@rem;
+    top: 80rem/@rem;
+    /*    top: 30rem/@rem;*/
 
     animation: goldicon 3s infinite;
     -moz-animation: goldicon 3s infinite;
@@ -690,7 +718,7 @@
   }
 
   .mainTest {
-    padding: 153.5rem/@rem 50rem/@rem;
+    padding: 133.5rem/@rem 50rem/@rem;
     z-index: 10;
   }
 
@@ -699,9 +727,10 @@
     background-size: 100% 100%;
     width: 656rem/@rem;
     height: 865rem/@rem;
-    margin: 205rem/@rem 60rem/@rem;
+    margin: 130rem/@rem 50rem/@rem;
+    /*    margin: 80rem/@rem 50rem/@rem;*/
     z-index: 5;
-
+    position: absolute;
     /*   position: absolute;
        left: 52rem/@rem;
        top: 205rem/@rem;*/
@@ -794,14 +823,43 @@
         p {
           width: 100%;
           padding: 0 40rem/@rem;
-          margin-top: -3px;
+          margin-top: -3rem/@rem;
           line-height: 35rem/@rem;
+
+          .icon{
+            display:block;
+            float:left;
+            width:5%;
+            padding:0 10rem/@rem;
+
+          }
+          .desc{
+            display:block;
+            float:left;
+            width:90%;
+
+          }
+
           &.columnStyle {
             width: 100%;
             text-align: center;
             padding: 0rem/@rem 20rem/@rem;
             line-height: 0.74666667rem;
+
+            .icon{
+              display:block;
+              float:left;
+              width:5%;
+              padding:0 10rem/@rem;
+            }
+            .desc{
+              display:block;
+              float:left;
+              width:75%;
+            }
+
           }
+
         }
       }
     }
@@ -874,6 +932,7 @@
         position: absolute;
         right: 0rem/@rem;
         top: 10rem/@rem;
+        z-index: 99;
       }
     }
 
@@ -883,12 +942,13 @@
       width: 671rem/@rem;
       height: 853rem/@rem;
       text-align: center;
-      /*margin: 150rem/@rem auto 45rem/@rem auto;*/
+      /*margin: 120rem/@rem auto 45rem/@rem auto;*/
       margin: 0rem/@rem auto;
 
       position: absolute;
       left: 39rem/@rem;
-      top: 218rem/@rem;
+      top: 50rem/@rem;
+      /*      top: 130rem/@rem;*/
 
       h1.bodyTxt {
         font-family: "pangmen";
@@ -914,7 +974,7 @@
         background-size: 100% 100%;
         width: 520rem/@rem;
         height: 330rem/@rem;
-        margin: 35rem/@rem auto;
+        margin: 0rem/@rem auto;
 
       }
       .top2 {
@@ -930,7 +990,7 @@
         background-size: 100% 100%;
         width: 520rem/@rem;
         height: 330rem/@rem;
-        margin: 35rem/@rem auto;
+        margin: 0rem/@rem auto;
 
       }
     }
@@ -939,9 +999,9 @@
       background-size: 100% 100%;
       width: 394rem/@rem;
       height: 175rem/@rem;
-      margin: 0rem/@rem auto;
+      /*      margin: 0rem/@rem auto;*/
       position: absolute;
-      bottom: 39rem/@rem;
+      bottom: 25rem/@rem;
       left: 198rem/@rem;
     }
   }
@@ -960,7 +1020,31 @@
     }
   }
 
-  @keyframes waterAnimate {
+  /*  @keyframes waterAnimate {
+      20% {
+        background: url("../../static/assets/water_1.png") no-repeat;
+        background-size: 100% 100%;
+        width: 442rem/@rem;
+        height: 895rem/@rem;
+        z-index: 1;
+      }
+      70% {
+        background: url("../../static/assets/water_2.png") no-repeat;
+        background-size: 100% 100%;
+        width: 442rem/@rem;
+        height: 895rem/@rem;
+        z-index: 1;
+      }
+      100% {
+        background: url("../../static/assets/water_3.png") no-repeat;
+        background-size: 100% 100%;
+        width: 442rem/@rem;
+        height: 895rem/@rem;
+        z-index: 1;
+      }
+    }*/
+
+  /*@-webkit-keyframes  waterAnimate {
     20% {
       background: url("../../static/assets/water_1.png") no-repeat;
       background-size: 100% 100%;
@@ -982,32 +1066,7 @@
       height: 895rem/@rem;
       z-index: 1;
     }
-  }
-
-  /*
-  @-webkit-keyframes waterAnimate {
-    0% {
-      background: url("../../static/assets/water_1.png") no-repeat;
-      background-size: 100% 100%;
-      width: 442rem/@rem;
-      height: 895rem/@rem;
-      /*z-index: 1;*/
-  /*}
- 50% {
-   background: url("../../static/assets/water_2.png") no-repeat;
-   background-size: 100% 100%;
-   width: 442rem/@rem;
-   height: 895rem/@rem;
-   /*z-index: 1;*/
-  /*}
- 100% {
-   background: url("../../static/assets/water_3.png") no-repeat;
-   background-size: 100% 100%;
-   width: 442rem/@rem;
-   height: 895rem/@rem;
-   /*z-index: 1;*/
-  /*}
-}*/
+  }*/
 
   @keyframes eyeAni {
     0% {
@@ -1123,20 +1182,6 @@
       -o-transform: translate(10px, 0px);
       -ms-transform: translate(10px, 0px);
     }
-    /*25% {*/
-    /*transform: translate(7px, 0px);*/
-    /*-webkit-transform: translate(7px, 0px);*/
-    /*-moz-transform: translate(7px, 0px);*/
-    /*-o-transform: translate(7px, 0px);*/
-    /*-ms-transform: translate(7px, 0px);*/
-    /*}*/
-    /*50% {*/
-    /*transform: translate(0px, 0px);*/
-    /*-webkit-transform: translate(0px, 0px);*/
-    /*-moz-transform: translate(0px, 0px);*/
-    /*-o-transform: translate(0px, 0px);*/
-    /*-ms-transform: translate(0px, 0px);*/
-    /*}*/
     95% {
       transform: translate(-7px, 0px);
       -webkit-transform: translate(-7px, 0px);
@@ -1150,14 +1195,6 @@
       -moz-transform: translate(-10px, 0px);
       -o-transform: translate(-10px, 0px);
       -ms-transform: translate(-10px, 0px);
-    }
-  }
-
-  @keyframes test2 {
-    from {
-      transform: rotate(30deg) translateX(500px) translateY(50px);
-    }
-    to {
     }
   }
 
