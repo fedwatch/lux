@@ -23,7 +23,7 @@
       <div class="sound" :class="PlayState ? 'start' : 'stop' " @click="changePlayState()"></div>
 
       <div class="water" style="position: absolute;z-index:1;"></div>
-      <div class="testPage_top" style="position: absolute;">
+      <div class="testPage_top">
         <div class="goldicon"></div>
       </div>
 
@@ -102,7 +102,7 @@
       您的浏览器不支持背景音乐播放。
     </audio>
 
-    <input type="hidden"  />
+    <input type="hidden"/>
   </div>
 </template>
 
@@ -129,7 +129,7 @@
     name: 'HouseKeepingTest',
     data () {
       return {
-        testState:false,
+        testState: false,
         number: 0,
         currentScore: 0,
         currentTest: 0,
@@ -316,14 +316,14 @@
               link: location.href,
               imgUrl: "/static/assets/bigTitle.png" // 分享图标
             });
-          }else if (this.currentScore > 40 && this.currentScore <= 70){
+          } else if (this.currentScore > 40 && this.currentScore <= 70) {
             alert("v40")
             wx.onMenuShareTimeline({
               title: this.shareFriend.v40.text, // 分享标题
               link: location.href,
               imgUrl: "分享图标的url,以http或https开头" // 分享图标
             });
-          }else{
+          } else {
             alert("v0")
             wx.onMenuShareTimeline({
               title: this.shareFriend.v0.text, // 分享标题
@@ -419,7 +419,7 @@
         });
         // 获取“分享给朋友”按钮点击状态及自定义分享内容接口
         wx.onMenuShareAppMessage({
-          title:this.shareFriend.testState.text, // 分享标题
+          title: this.shareFriend.testState.text, // 分享标题
           desc: "分享描述", // 分享描述
           link: location.href,
           imgUrl: "/static/assets/bigTitle.png", // 分享图标
@@ -446,46 +446,6 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less">
-
-  #app {
-    height: 100%;
-  }
-
-  #houseKeepingTest {
-    height: 100%;
-  }
-
-  .sound {
-    background: url("../../static/assets/sound_on.png") no-repeat;
-    background-size: 100% 100%;
-    width: 76rem/@rem;
-    height: 59rem/@rem;
-
-    position: absolute;
-    top: 10rem/@rem;
-    right: 10rem/@rem;
-
-    &.start {
-
-      animation: rotateMotion 2s infinite;
-      -moz-animation: rotateMotion 2s infinite;
-      -webkit-animation: rotateMotion 2s infinite;
-      -o-animation: rotateMotion 2s infinite;
-    }
-
-    &.stop {
-      background: url("../../static/assets/sound_off.png") no-repeat;
-      background-size: 100% 100%;
-      width: 61rem/@rem;
-      height: 54rem/@rem;
-      position: absolute;
-
-      top: 15rem/@rem;
-      right: 15rem/@rem;
-    }
-
-  }
-
   @rem: 46.875;
   @disance-left: -10px;
   @disance-right: 10px;
@@ -512,6 +472,44 @@
     background-attachment: fixed;
   }
 
+  #app {
+    height: 100%;
+  }
+
+  #houseKeepingTest {
+    height: 100%;
+  }
+
+  .sound {
+    background: url("../../static/assets/sound_on.png") no-repeat;
+    background-size: 100% 100%;
+    width: 76rem/@rem;
+    height: 59rem/@rem;
+
+    position: absolute;
+    top: 10rem/@rem;
+    right: 10rem/@rem;
+
+    &.start {
+      animation: rotateMotion 2s infinite;
+      -moz-animation: rotateMotion 2s infinite;
+      -webkit-animation: rotateMotion 2s infinite;
+      -o-animation: rotateMotion 2s infinite;
+    }
+
+    &.stop {
+      background: url("../../static/assets/sound_off.png") no-repeat;
+      background-size: 100% 100%;
+      width: 61rem/@rem;
+      height: 54rem/@rem;
+
+      position: absolute;
+      top: 15rem/@rem;
+      right: 15rem/@rem;
+    }
+
+  }
+
   .page {
     width: 100%;
     height: 100%;
@@ -533,7 +531,7 @@
 
   /*第一幕*/
   .houseKeepingIndex {
-    background: url("../../static/assets/bg.png") no-repeat;
+    background: url("../../static/assets/bg.png") no-repeat center center;
     background-size: 100% 100%;
     background-attachment: fixed;
     height: 100%;
@@ -559,20 +557,17 @@
       background-size: 100% 100%;
       width: 667rem/@rem;
       height: 480rem/@rem;
+      /*   margin: 10rem/@rem auto;*/
 
-      margin: 10rem/@rem auto;
-
-      /*margin: 50rem/@rem 18rem/@rem;*/
+      position: absolute;
+      top: 30rem/@rem;
+      right: 36rem/@rem;
 
       animation: bigMotion2 2s infinite;
       -moz-animation: bigMotion2 2s infinite;
       -webkit-animation: bigMotion2 2s infinite;
       -o-animation: bigMotion2 2s infinite;
 
-      /*animation: big 5s infinite;*/
-      /*-moz-animation: titleMotion 5s infinite;*/
-      /*-webkit-animation: titleMotion 5s infinite;*/
-      /*-o-animation: titleMotion 5s infinite;*/
     }
 
     .girl {
@@ -581,20 +576,24 @@
       width: 121rem/@rem;
       height: 150rem/@rem;
 
-      /*
-      margin-top: -25rem/@rem;
-      margin-left: 175rem/@rem;
-      */
-      margin-left: 175rem/@rem;
-      margin-top: 25rem/@rem;
+      position: absolute;
+      top: 571rem/@rem;
+      left: 150rem/@rem;
+
+      /*  margin-left: 175rem/@rem;
+        margin-top: 25rem/@rem;*/
 
     }
 
     .ask {
       width: 508rem/@rem;
       height: 126rem/@rem;
-      margin: 115rem/@rem auto;
+
       text-align: center;
+      margin: 155rem/@rem auto;
+      /*     position: absolute;
+           bottom: 250rem/@rem;
+           left: 117rem/@rem;*/
     }
 
     .arrow {
@@ -602,28 +601,27 @@
       background-size: 100% 100%;
       width: 259rem/@rem;
       height: 118rem/@rem;
-      /*
-      position: absolute;
-      bottom: 190rem/@rem;
-      left: 130rem/@rem;
-      */
       float: left;
 
       animation: transX 1.5s infinite;
       -moz-animation: transX 1.5s infinite;
       -webkit-animation: transX 1.5s infinite;
       -o-animation: transX 1.5s infinite;
+      /*      position: absolute;
+            bottom: 170rem/@rem;
+            left: 117rem/@rem;    */
+
     }
     .ask-n {
       background: url("../../static/assets/ask-n.png") no-repeat;
       background-size: 100% 100%;
       width: 208rem/@rem;
       height: 114rem/@rem;
-      float: right /*
-      position: absolute;
-      bottom: 200rem/@rem;
-      right: 130rem/@rem;
-      */
+      float: right;
+
+      /*     position: absolute;
+           bottom: 186rem/@rem;
+           right: 150rem/@rem;*/
     }
 
     .hospital {
@@ -664,8 +662,8 @@
     height: 895rem/@rem;
 
     position: absolute;
-    top: -20rem/@rem;
-    left: -5rem/@rem;
+    top: 0rem/@rem;
+    left: 0rem/@rem;
 
     animation: waterAnimate 3s infinite;
     -moz-animation: waterAnimate 3s infinite;
@@ -677,13 +675,13 @@
   .goldicon {
     background: url("../../static/assets/goldcoin.png") no-repeat;
     background-size: 100% 100%;
-
     width: 169rem/@rem;
     height: 169rem/@rem;
+    z-index: 2;
+
     position: absolute;
     left: 330rem/@rem;
-    top: 79rem/@rem;
-    z-index: 2;
+    top: 160rem/@rem;
 
     animation: goldicon 3s infinite;
     -moz-animation: goldicon 3s infinite;
@@ -701,8 +699,12 @@
     background-size: 100% 100%;
     width: 656rem/@rem;
     height: 865rem/@rem;
-    margin: 150rem/@rem 50rem/@rem;
+    margin: 205rem/@rem 60rem/@rem;
     z-index: 5;
+
+    /*   position: absolute;
+       left: 52rem/@rem;
+       top: 205rem/@rem;*/
   }
 
   .testPage_bottom {
@@ -720,6 +722,7 @@
   }
 
   .question p {
+    font-size: 30rem/@rem;
     font-family: "Microsoft YaHei UI";
     font-weight: bold;
     padding: 25rem/@rem 0;
@@ -880,24 +883,30 @@
       width: 671rem/@rem;
       height: 853rem/@rem;
       text-align: center;
-      margin: 150rem/@rem auto 45rem/@rem auto;
+      /*margin: 150rem/@rem auto 45rem/@rem auto;*/
+      margin: 0rem/@rem auto;
+
+      position: absolute;
+      left: 39rem/@rem;
+      top: 218rem/@rem;
 
       h1.bodyTxt {
         font-family: "pangmen";
-        padding-top: 220rem/@rem;
+        padding-top: 150rem/@rem;
         padding-bottom: 0rem/@rem;
-        font-size: 65rem/@rem;
+        padding-left: 20rem/@rem;
+        font-size: 81.9rem/@rem;
         color: rgb(246, 60, 84);
         span {
           font-family: "pangmen";
-          font-size: 100rem/@rem;
+          font-size: 139.8rem/@rem;
           color: rgb(246, 60, 84);
-          padding: 0 15rem/@rem;
-          letter-spacing: 10rem/@rem;
+          /*    padding: 0 15rem/@rem;
+              letter-spacing: 10rem/@rem;*/
         }
       }
       .bodyStyle {
-        padding: 10rem/@rem 90rem/@rem;
+        padding: 0rem/@rem 90rem/@rem;
       }
 
       .top1 {
@@ -913,7 +922,7 @@
         background-size: 100% 100%;
         width: 520rem/@rem;
         height: 330rem/@rem;
-        margin: 35rem/@rem auto;
+        margin: 0rem/@rem auto;
 
       }
       .top3 {
@@ -931,6 +940,9 @@
       width: 394rem/@rem;
       height: 175rem/@rem;
       margin: 0rem/@rem auto;
+      position: absolute;
+      bottom: 39rem/@rem;
+      left: 198rem/@rem;
     }
   }
 
@@ -972,7 +984,6 @@
     }
   }
 
-
   /*
   @-webkit-keyframes waterAnimate {
     0% {
@@ -998,82 +1009,82 @@
   /*}
 }*/
 
-@keyframes eyeAni {
- 0% {
-   transform: scale(0.8);
-   -webkit-transform: scale(0.8);
-   -moz-transform: scale(0.8);
-   -o-transform: scale(0.8);
-   -ms-transform: scale(0.8);
- }
- 50% {
-   transform: scale(1.2);
-   -webkit-transform: scale(1.2);
-   -moz-transform: scale(1.2);
-   -o-transform: scale(1.2);
-   -ms-transform: scale(1.2);
- }
- 100% {
-   transform: scale(0.8);
-   -webkit-transform: scale(0.8);
-   -moz-transform: scale(0.8);
-   -o-transform: scale(0.8);
-   -ms-transform: scale(0.8);
- }
-}
+  @keyframes eyeAni {
+    0% {
+      transform: scale(0.8);
+      -webkit-transform: scale(0.8);
+      -moz-transform: scale(0.8);
+      -o-transform: scale(0.8);
+      -ms-transform: scale(0.8);
+    }
+    50% {
+      transform: scale(1.2);
+      -webkit-transform: scale(1.2);
+      -moz-transform: scale(1.2);
+      -o-transform: scale(1.2);
+      -ms-transform: scale(1.2);
+    }
+    100% {
+      transform: scale(0.8);
+      -webkit-transform: scale(0.8);
+      -moz-transform: scale(0.8);
+      -o-transform: scale(0.8);
+      -ms-transform: scale(0.8);
+    }
+  }
 
-@keyframes bigMotion {
- 0% {
-   transform: scale(0.8);
-   -webkit-transform: scale(0.8);
-   -moz-transform: scale(0.8);
-   -o-transform: scale(0.8);
-   -ms-transform: scale(0.8);
- }
- 50% {
-   transform: scale(1.2);
-   -webkit-transform: scale(1.2);
-   -moz-transform: scale(1.2);
-   -o-transform: scale(1.2);
-   -ms-transform: scale(1.2);
- }
- 100% {
-   transform: scale(0.8);
-   -webkit-transform: scale(0.8);
-   -moz-transform: scale(0.8);
-   -o-transform: scale(0.8);
-   -ms-transform: scale(0.8);
- }
-}
+  @keyframes bigMotion {
+    0% {
+      transform: scale(0.8);
+      -webkit-transform: scale(0.8);
+      -moz-transform: scale(0.8);
+      -o-transform: scale(0.8);
+      -ms-transform: scale(0.8);
+    }
+    50% {
+      transform: scale(1.2);
+      -webkit-transform: scale(1.2);
+      -moz-transform: scale(1.2);
+      -o-transform: scale(1.2);
+      -ms-transform: scale(1.2);
+    }
+    100% {
+      transform: scale(0.8);
+      -webkit-transform: scale(0.8);
+      -moz-transform: scale(0.8);
+      -o-transform: scale(0.8);
+      -ms-transform: scale(0.8);
+    }
+  }
 
-@keyframes bigMotion2 {
- 0% {
-   transform: scale(0.95);
-   -webkit-transform: scale(0.95);
-   -moz-transform: scale(0.95);
-   -o-transform: scale(0.95);
-   -ms-transform: scale(0.95);
- }
- 50% {
-   transform: scale(1.0);
-   -webkit-transform: scale(1.0);
-   -moz-transform: scale(1.0);
-   -o-transform: scale(1.0);
-   -ms-transform: scale(1.0);
- }
- 100% {
-   transform: scale(0.95);
-   -webkit-transform: scale(0.95);
-   -moz-transform: scale(0.95);
-   -o-transform: scale(0.95);
-   -ms-transform: scale(0.95);
- }
-}
+  @keyframes bigMotion2 {
+    0% {
+      transform: scale(0.95);
+      -webkit-transform: scale(0.95);
+      -moz-transform: scale(0.95);
+      -o-transform: scale(0.95);
+      -ms-transform: scale(0.95);
+    }
+    50% {
+      transform: scale(1.0);
+      -webkit-transform: scale(1.0);
+      -moz-transform: scale(1.0);
+      -o-transform: scale(1.0);
+      -ms-transform: scale(1.0);
+    }
+    100% {
+      transform: scale(0.95);
+      -webkit-transform: scale(0.95);
+      -moz-transform: scale(0.95);
+      -o-transform: scale(0.95);
+      -ms-transform: scale(0.95);
+    }
+  }
 
-@keyframes rotateMotion {
- from {
-   transform: rotate(0deg);
-   -ms-transform: rotate(0deg); /* IE 9 */
+  @keyframes rotateMotion {
+    from {
+      transform: rotate(0deg);
+      -ms-transform: rotate(0deg); /* IE 9 */
       -moz-transform: rotate(0deg); /* Firefox */
       -webkit-transform: rotate(0deg); /* Safari 和 Chrome */
       -o-transform: rotate(0deg); /* Opera */
@@ -1089,33 +1100,13 @@
 
   @keyframes goldicon {
     10% {
-      background: url("../../static/assets/goldcoin.png") no-repeat;
-      background-size: 100% 100%;
-
-      width: 169rem/@rem;
-      height: 169rem/@rem;
-      position: absolute;
-      left: 330rem/@rem;
-      top: 79rem/@rem;
-      z-index: 2;
-
       transform: rotate(0deg);
       -ms-transform: rotate(0deg); /* IE 9 */
       -moz-transform: rotate(0deg); /* Firefox */
       -webkit-transform: rotate(0deg); /* Safari 和 Chrome */
       -o-transform: rotate(0deg); /* Opera */
     }
-
     100% {
-      background: url("../../static/assets/goldcoin.png") no-repeat;
-      background-size: 100% 100%;
-      width: 169rem/@rem;
-      height: 169rem/@rem;
-      position: absolute;
-      left: 330rem/@rem;
-      top: 79rem/@rem;
-      z-index: 2;
-
       transform: rotate(360deg);
       -ms-transform: rotate(360deg); /* IE 9 */
       -moz-transform: rotate(360deg); /* Firefox */
