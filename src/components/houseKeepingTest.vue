@@ -104,7 +104,7 @@
 
 
     <audio id="music" :autoplay='PlayState == true' controls loop>
-      <source src="/static/music/PianoMan.mp3" type="audio/mp3">
+      <source src="../../static/music/PianoMan.mp3" type="audio/mp3">
       您的浏览器不支持背景音乐播放。
     </audio>
 
@@ -132,6 +132,14 @@
   //  require("/static/utils/resetRem");
   //  import $ from 'node_modules/dom7'
 
+  let buildUrl = "";
+  if (process.env.NODE_ENV == "development") {
+    buildUrl = "/static/";
+    console.log(process.env.NODE_ENV);
+  } else {
+    buildUrl = "/h5Static/"
+  }
+
   export default {
     name: 'HouseKeepingTest',
     data () {
@@ -155,10 +163,10 @@
             qTitle: "品酒（装X）大会上，你碰到了许久未见的薇薇安，眼尖的你一眼就看出她身上的这件是A货:",
             qImg: "",
             a: [
-              {icon: "A", title: "爱马仕 logo 图", img: "/static/images/Hermes.jpg", score: 10, selected: false},
-              {icon: "B", title: "博柏利 logo 图", img: "/static/images/burberry.jpg", score: 6, selected: false},
-              {icon: "C", title: "Prada logo 图", img: "/static/images/prada.jpg", score: 6, selected: false},
-              {icon: "D", title: "香奈儿 logo 图", img: "/static/images/chanel.jpg", score: 6, selected: false}
+              {icon: "A", title: "爱马仕 logo 图", img: buildUrl + "/images/Hermes.jpg", score: 10, selected: false},
+              {icon: "B", title: "博柏利 logo 图", img: buildUrl + "/images/burberry.jpg", score: 6, selected: false},
+              {icon: "C", title: "Prada logo 图", img: buildUrl + "/images/prada.jpg", score: 6, selected: false},
+              {icon: "D", title: "香奈儿 logo 图", img: buildUrl + "/images/chanel.jpg", score: 6, selected: false}
             ]
           },
           {
@@ -166,7 +174,7 @@
             columnStyle: true,
             imgData: true,
             qTitle: "凯莉四处炫耀最近新买的包包，但是竟然连品牌名都读错了，机智的你知道它念:",
-            qImg: "/static/images/q2.png",
+            qImg: buildUrl + "/images/q2.png",
             a: [
               {icon: "A", title: "梵哲希", img: "", score: 6, selected: false},
               {icon: "B", title: "范思哲", img: "", score: 10, selected: false},
@@ -233,10 +241,10 @@
             qTitle: "恰逢去巴黎出差，女朋友千叮咛万嘱咐要一只“姨妈色”的口红，所以你选了:",
             qImg: "",
             a: [
-              {icon: "A", title: "", img: "/static/images/u114.jpg", score: 6, selected: false},
-              {icon: "B", title: "", img: "/static/images/u116.jpg", score: 6, selected: false},
-              {icon: "C", title: "", img: "/static/images/u118.jpg", score: 10, selected: false},
-              {icon: "D", title: "", img: "/static/images/u120.jpg", score: 6, selected: false}
+              {icon: "A", title: "", img: buildUrl + "/images/u114.jpg", score: 6, selected: false},
+              {icon: "B", title: "", img: buildUrl + "/images/u116.jpg", score: 6, selected: false},
+              {icon: "C", title: "", img: buildUrl + "/images/u118.jpg", score: 10, selected: false},
+              {icon: "D", title: "", img: buildUrl + "/images/u120.jpg", score: 6, selected: false}
             ]
           },
           {
@@ -321,7 +329,7 @@
             wx.onMenuShareTimeline({
               title: this.shareFriend.v70.text, // 分享标题
               link: location.href,
-              imgUrl: "/static/assets/bigTitle.png" // 分享图标
+              imgUrl: "./static/assets/bigTitle.png" // 分享图标
             });
           } else if (this.currentScore > 40 && this.currentScore <= 70) {
             alert("v40")
@@ -376,89 +384,73 @@
         return this.currentScore + 1
       }
     },
-
-    beforeCreate: function () {
-
-    },
-    cteated: function () {
-
-    },
-    beforeMount: function () {
-
-    },
     mounted: function () {
       console.log("mounted")
       rem.resetRem();
       var ua = rem.myBrowser();
 //      alert(ua)
       if (ua == "Safari") {
+        $(".share").hide();
         $(".ask").css("margin", "2.77333rem");
         $(".girl").css("top", " 11.09333333rem");
-        $(".share").hide();
         $(".testPage_body").css("margin", "1.70667rem 1.06667rem");
         $(".goldicon").css("top", "0.64rem");
         $(".water").css("top", "0rem");
       } else if (ua == "wxApp") {
         $(".hkr_body").css("top", "2.77333rem");
+        $(".ask").css("margin", "2.87333rem");
       }
       this.PlayState = true;
 
-//      appShare('shareBtn', { //H5按钮的分享
-//        shareTip: 'test',
-//        title: '呼朋唤友，fun肆一夏！你的好友邀请你来领礼包啦~',
-//        content: '1%加息券，一键即可领取，任意首投还送9888元体验金',
-//        url: 'http://139.129.110.155/recommend/recommend',
-//        imgUrl: 'http://139.129.110.155/static/images/global/share_logo.jpg',
-//        shareTypes: ['weixinFriends', 'QQFriends']
-//      })
+      this.$http.get('/V2/AboutApp/getShareInfo?url=' + location.href).then((data) => {
+        // 微信配置
+        wx.config({
+          appId: data.body.r.appId,
+          timestamp: data.body.r.timestamp,
+          nonceStr: data.body.r.nonceStr,
+          signature: data.body.r.signature,
+          jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'] // 功能列表，我们要使用JS-SDK的什么功能
+        });
 
-//      share
-      console.log()
+        console.log(data.body.r.appId);
+        console.log(data.body.r.timestamp);
+        console.log(data.body.r.nonceStr);
+        console.log(data.body.r.signature);
 
-      // 微信配置
-      wx.config({
-        debug: false,
-        appId: "wxa9d50133df6af1fd",
-        timestamp: '上一步生成的时间戳',
-        nonceStr: '上一步中的字符串',
-        signature: '上一步生成的签名',
-        jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'] // 功能列表，我们要使用JS-SDK的什么功能
+      });
+
+
+      wx.checkJsApi({
+        jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'],
+        success: function(data) {
+          // 以键值对的形式返回，可用的api值true，不可用为false
+          // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+          console.log(data)
+        }
       });
 
       // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在 页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready 函数中。
       wx.ready(function () {
-
         var music = document.getElementById("music");
-        music.src = "/static/music/PianoMan.mp3"
+        music.src = buildUrl+"/music/PianoMan.mp3"
         music.play();
+
 
         // 获取“分享到朋友圈”按钮点击状态及自定义分享内容接口
         wx.onMenuShareTimeline({
-          title: '分享标题', // 分享标题
+          title: '测测你是\"败家体\"还是\"持家体\"', // 分享标题
           link: location.href,
-          imgUrl: "/static/assets/bigTitle.png" // 分享图标
+          imgUrl: "http://newhuo.yonglibao.com/static/images/global/logo.png" // 分享图标
         });
         // 获取“分享给朋友”按钮点击状态及自定义分享内容接口
         wx.onMenuShareAppMessage({
           title: this.shareFriend.testState.text, // 分享标题
-          desc: "分享描述", // 分享描述
+          desc: "测测你是\"败家体\"还是\"持家体\"", // 分享描述
           link: location.href,
-          imgUrl: "/static/assets/bigTitle.png", // 分享图标
+          imgUrl: "http://newhuo.yonglibao.com/static/images/global/logo.png", // 分享图标
           type: 'link', // 分享类型,music、video或link，不填默认为link
         });
       });
-
-    },
-    beforeUpdate: function () {
-
-    },
-    updated: function () {
-
-    },
-    beforeDestroy: function () {
-
-    },
-    destroyed: function () {
 
     },
 
@@ -771,7 +763,7 @@
       line-height: 30rem/@rem;
       padding: 0rem/@rem 15rem/@rem;
       li {
-        background: url("/static/assets/unselected.png") no-repeat left center;
+        background: url("../../static/assets/unselected.png") no-repeat left center;
         background-size: 10% auto;
         width: 80%;
         height: 20rem/@rem;
@@ -781,7 +773,7 @@
         vertical-align: middle;
 
         &:before {
-          background: url("/static/assets/unselected.png") no-repeat left center;
+          background: url("../../static/assets/unselected.png") no-repeat left center;
           background-size: 10% auto;
           padding: 0 20rem/@rem;
           width: 20rem/@rem;
@@ -789,7 +781,7 @@
         }
         &.active {
           display: block;
-          background: url("/static/assets/selected.png") no-repeat left center;
+          background: url("../../static/assets/selected.png") no-repeat left center;
           background-size: 10% auto;
           width: 80%;
           height: 20rem/@rem;
@@ -797,7 +789,7 @@
           padding: 20rem/@rem 25rem/@rem;
         }
         &.columnStyle {
-          background: url("/static/assets/unselected.png") no-repeat left center;
+          background: url("../../static/assets/unselected.png") no-repeat left center;
           background-size: 18% auto;
           width: 40%;
           height: 20rem/@rem;
@@ -805,7 +797,7 @@
           padding: 25rem/@rem 20rem/@rem;
           float: left;
           &.active {
-            background: url("/static/assets/selected.png") no-repeat left center;
+            background: url("../../static/assets/selected.png") no-repeat left center;
             background-size: 18% auto;
             width: 40%;
             height: 20rem/@rem;
@@ -826,17 +818,17 @@
           margin-top: -3rem/@rem;
           line-height: 35rem/@rem;
 
-          .icon{
-            display:block;
-            float:left;
-            width:5%;
-            padding:0 10rem/@rem;
+          .icon {
+            display: block;
+            float: left;
+            width: 5%;
+            padding: 0 10rem/@rem;
 
           }
-          .desc{
-            display:block;
-            float:left;
-            width:90%;
+          .desc {
+            display: block;
+            float: left;
+            width: 90%;
 
           }
 
@@ -846,16 +838,17 @@
             padding: 0rem/@rem 20rem/@rem;
             line-height: 0.74666667rem;
 
-            .icon{
-              display:block;
-              float:left;
-              width:5%;
-              padding:0 10rem/@rem;
+            .icon {
+              display: block;
+              float: left;
+              width: 20%;
+              /*padding:0 10rem/@rem;*/
+              text-align: right;
             }
-            .desc{
-              display:block;
-              float:left;
-              width:75%;
+            .desc {
+              display: block;
+              float: left;
+              width: 60%;
             }
 
           }

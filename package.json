@@ -12,15 +12,18 @@
   "dependencies": {
     "fontmin": "^0.9.6",
     "vue": "^2.5.2",
+    "vue-resource": "^1.3.4",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "animate.css": "^3.5.2",
     "autoprefixer": "^7.1.2",
+    "babel": "^6.23.0",
     "babel-core": "^6.22.1",
     "babel-loader": "^7.1.1",
     "babel-plugin-transform-runtime": "^6.22.0",
-    "babel-preset-env": "^1.3.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "^6.22.0",
     "babel-register": "^6.22.0",
     "chalk": "^2.0.1",
@@ -51,6 +54,7 @@
     "semver": "^5.3.0",
     "shelljs": "^0.7.6",
     "swiper": "^4.0.3",
+    "uglifyjs-webpack-plugin": "^1.0.1",
     "url-loader": "^0.5.8",
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.1",

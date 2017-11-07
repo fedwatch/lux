@@ -38,9 +38,11 @@ module.exports = {
         loader: 'babel-loader',
         include: [
           resolve('src'),
-          resolve('node_modules/dom7'),
+          resolve('static'),
+          resolve('./node_modules/_dom7'),
+          resolve('./node_modules/_swiper'),
           resolve('test')
-        ]
+        ],
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -67,5 +69,6 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+
 }
