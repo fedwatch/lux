@@ -5,7 +5,8 @@ import houseKeepingTest from '../components/houseKeepingTest.vue'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+/*  mode: 'history',*/
+  hashbang:false,
   routes: [
     {
       path: '/',

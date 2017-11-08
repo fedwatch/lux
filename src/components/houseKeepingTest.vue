@@ -117,24 +117,10 @@
 
 <script>
 
-  /*
-   beforeCreate    组件实例刚刚被创建,属性都没有
-   created    实例已经创建完成，属性已经绑定
-   beforeMount    模板编译之前
-   mounted    模板编译之后，代替之前ready  *
-   beforeUpdate    组件更新之前
-   updated    组件更新完毕    *
-   beforeDestroy    组件销毁前
-   destroyed    组件销毁后
-   */
   import $ from "n-zepto";
   import "swiper";
   import rem  from "../../static/utils/resetRem";
 
-  //  import appShare  from "../../static/utils/appShare";
-  //  require("");
-  //  require("/static/utils/resetRem");
-  //  import $ from 'node_modules/dom7'
 
   let buildUrl = "";
   if (process.env.NODE_ENV == "development") {
@@ -378,15 +364,15 @@
       }
 
     },
-    computed: {
-      // 一个计算属性的 getter
-      process: function () {
-        // `this` 指向 vm 实例
-        return this.currentScore + 1
-      }
-    },
     mounted: function () {
-      console.log("mounted")
+      let curl = location.href.split("#")[0];
+      curl = encodeURIComponent(curl)
+      let URL = location.href.split("#")[0];
+      let preDetect = location.href.indexOf("from=singlemessage&isappinstalled=")
+      console.log(preDetect)
+      let ks = "http://testhuo.yonglibao.com/V2/Wxh5/testGame/?from=singlemessage&isappinstalled=0#/";
+      console.log(ks.split("#")[0].split("?")[0]);
+
       rem.resetRem();
       let ua = rem.myBrowser();
 //      alert(ua)
@@ -402,8 +388,7 @@
         $(".ask").css("margin", "2.87333rem");
       }
       this.PlayState = true;
-      var URL = location.href.split("#")[0];
-      this.$http.get('/V2/AboutApp/getShareInfo?url='+URL).then((data) => {
+      this.$http.get('/V2/AboutApp/getShareInfo?url=' + URL).then((data) => {
         // 微信配置
         wx.config({
           debug: true,
@@ -419,18 +404,10 @@
             'onMenuShareWeibo'
           ]
         });
-
-        console.log(data.body.r.appId);
-        console.log(data.body.r.timestamp);
-        console.log(data.body.r.nonceStr);
-        console.log(data.body.r.signature);
-
       });
 
 
       let _this;
-
-
       wx.checkJsApi({
         jsApiList: [
           'onMenuShareTimeline',
@@ -438,7 +415,7 @@
           'onMenuShareQQ',
           'onMenuShareWeibo'
         ],
-        success: function(data) {
+        success: function (data) {
           // 以键值对的形式返回，可用的api值true，不可用为false
           // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
           alert(data)
@@ -448,20 +425,18 @@
       // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在 页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready 函数中。
       wx.ready(function () {
         let music = document.getElementById("music");
-        music.src = buildUrl+"/music/PianoMan.mp3";
+        music.src = buildUrl + "/music/PianoMan.mp3";
         music.play();
-
+//      发送给朋友圈
         wx.onMenuShareTimeline({
-          title: '测测你是\"败家体\"还是\"持家体\"', // 分享标题
-          link: 'http://testhuo.yonglibao.com/V2/Wxh5/testGame/', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-          imgUrl: 'http://testhuo.yonglibao.com/static/images/global/logo.png', // 分享图标
+          title: '测测你是\"败家体\"还是\"持家体\"',
+          link: curl,
+          imgUrl: buildUrl + '/images/wxH5ShareIcon.png',
           success: function () {
-            alert("分享成功")
             // 用户确认分享后执行的回调函数
-            _this.$http.get("/V2/Wxh5/statistics").then((data)=>{
-
+            _this.$http.get("/V2/Wxh5/statistics").then((data) => {
+                alert(data);
             })
-            alert("Wxh5 statistics")
           },
           cancel: function () {
             // 用户取消分享后执行的回调函数
@@ -469,13 +444,15 @@
           }
         });
 
+
+//        发送给朋友
         wx.onMenuShareAppMessage({
-          title: _this.shareFriend.testState.text, // 分享标题
-          desc: '测测你是\"败家体\"还是\"持家体\"', // 分享描述
-          link: 'http://testhuo.yonglibao.com/V2/Wxh5/testGame/', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-          imgUrl: 'http://testhuo.yonglibao.com/static/images/global/logo.png', // 分享图标
-          type: 'link', // 分享类型,music、video或link，不填默认为link
-          dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+          title: '测测你是\"败家体\"还是\"持家体\"',
+          desc: '此测试预言了我双11的表现！',
+          link: curl,
+          imgUrl: buildUrl + '/images/wxH5ShareIcon.png',
+          type: 'link',
+          dataUrl: '',
           success: function () {
             // 用户确认分享后执行的回调函数
             alert("分享成功")
