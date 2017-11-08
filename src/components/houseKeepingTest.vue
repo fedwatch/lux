@@ -405,7 +405,7 @@
         //      发送给朋友圈
           wx.onMenuShareTimeline({
             title: this.ShareResult.title,
-            link:  location.href.split("#")[0],
+            link:  location.href.split("#")[0]+Math.floor(Math.random()*10000),
             imgUrl: location.protocol+"//"+location.host + '/h5Static/images/wxH5ShareIcon300.png',
             success: function () {
               _this.$http.get("/V2/Wxh5/statistics").then((data) => {})
@@ -420,7 +420,7 @@
           wx.onMenuShareAppMessage({
             title: '测测你是\"败家体\"还是\"持家体\"A',
             desc: '此测试预言了我双11的表现！',
-            link:  location.href.split("#")[0],
+            link:  location.href.split("#")[0]+Math.floor(Math.random()*10000),
             imgUrl: location.protocol+"//"+location.host + '/h5Static/images/wxH5ShareIcon.png',
             type: 'link',
             dataUrl: '',
