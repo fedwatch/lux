@@ -84,7 +84,7 @@
     <!--result-->
     <div class="houseKeepingResult page" v-show="houseKeepingResult == true">
       <div class="hkr_header">
-        <div class="share shake-slow shake-constant"></div>
+        <div class="share shake-slow shake-constant" @click="shareFriendWithPyq()"></div>
       </div>
 
       <div class="hkr_body">
@@ -311,25 +311,112 @@
        * 戳这里 分享朋友圈
        */
       shareFriendWithPyq(){
+
         console.log("shareFriendWithPyq")
-        if (this.currentScore > 70) {
-//            this.result.v70
+        if (this.testState == false) {
+
+        } else if (this.currentScore > 70 && this.testState == true) {
+//      发送给朋友圈
           wx.onMenuShareTimeline({
             title: this.shareFriend.v70.text, // 分享标题
-            link: location.href,
-            imgUrl: "./static/assets/bigTitle.png" // 分享图标
+            link:  location.href.split("#")[0],
+            imgUrl: location.protocol+"//"+location.host + '/h5Static/images/wxH5ShareIcon300.png',
+            success: function () {
+              // 用户确认分享后执行的回调函数
+              _this.$http.get("/V2/Wxh5/statistics").then((data) => {
+                alert(data);
+              })
+            },
+            cancel: function () {
+              // 用户取消分享后执行的回调函数
+              alert("取消分享")
+            }
           });
-        } else if (this.currentScore > 40 && this.currentScore <= 70) {
+//      发送给朋友
+          wx.onMenuShareAppMessage({
+            title: this.shareFriend.v70.text, // 分享标题
+            desc: '此测试预言了我双11的表现！',
+            link:  location.href.split("#")[0],
+            imgUrl: location.protocol+"//"+location.host + '/h5Static/images/wxH5ShareIcon.png',
+            type: 'link',
+            dataUrl: '',
+            success: function () {
+              // 用户确认分享后执行的回调函数
+              alert("分享成功")
+            },
+            cancel: function () {
+              // 用户取消分享后执行的回调函数
+              alert("取消分享")
+            }
+          });
+
+        } else if (this.currentScore > 40 && this.currentScore <= 70 && _this.testState == true) {
+//      发送给朋友圈
           wx.onMenuShareTimeline({
             title: this.shareFriend.v40.text, // 分享标题
-            link: location.href,
-            imgUrl: "分享图标的url,以http或https开头" // 分享图标
+            link:  location.href.split("#")[0],
+            imgUrl: location.protocol+"//"+location.host + '/h5Static/images/wxH5ShareIcon300.png',
+            success: function () {
+              // 用户确认分享后执行的回调函数
+              this.$http.get("/V2/Wxh5/statistics").then((data) => {
+                alert(data);
+              })
+            },
+            cancel: function () {
+              // 用户取消分享后执行的回调函数
+              alert("取消分享")
+            }
+          });
+//      发送给朋友
+          wx.onMenuShareAppMessage({
+            title: this.shareFriend.v40.text, // 分享标题
+            desc: '此测试预言了我双11的表现！',
+            link:  location.href.split("#")[0],
+            imgUrl: location.protocol+"//"+location.host + '/h5Static/images/wxH5ShareIcon.png',
+            type: 'link',
+            dataUrl: '',
+            success: function () {
+              // 用户确认分享后执行的回调函数
+              alert("分享成功")
+            },
+            cancel: function () {
+              // 用户取消分享后执行的回调函数
+              alert("取消分享")
+            }
           });
         } else {
+//      发送给朋友圈
           wx.onMenuShareTimeline({
+            title: _this.shareFriend.v0.text, // 分享标题
+            link:  location.href.split("#")[0],
+            imgUrl: location.protocol+"//"+location.host + '/h5Static/images/wxH5ShareIcon300.png',
+            success: function () {
+              // 用户确认分享后执行的回调函数
+              this.$http.get("/V2/Wxh5/statistics").then((data) => {
+                alert(data);
+              })
+            },
+            cancel: function () {
+              // 用户取消分享后执行的回调函数
+              alert("取消分享")
+            }
+          });
+//      发送给朋友
+          wx.onMenuShareAppMessage({
             title: this.shareFriend.v0.text, // 分享标题
-            link: location.href,
-            imgUrl: "分享图标的url,以http或https开头" // 分享图标
+            desc: '此测试预言了我双11的表现！',
+            link:  location.href.split("#")[0],
+            imgUrl: location.protocol+"//"+location.host + '/h5Static/images/wxH5ShareIcon.png',
+            type: 'link',
+            dataUrl: '',
+            success: function () {
+              // 用户确认分享后执行的回调函数
+              alert("分享成功")
+            },
+            cancel: function () {
+              // 用户取消分享后执行的回调函数
+              alert("取消分享")
+            }
           });
         }
 
@@ -348,7 +435,6 @@
           _this.currentScore = _this.currentScore + parseInt(s);
           _this.currentTest += 1;
 
-          console.log(_this.currentScore);
 
           if (_this.currentTest == 8) {
             _this.houseKeepingIndex = false;
@@ -366,12 +452,12 @@
     },
     mounted: function () {
       let curl = location.href.split("#")[0];
-      curl = encodeURIComponent(curl)
+      curl = encodeURIComponent(location.href.split("#")[0])
       let URL = location.href.split("#")[0];
       let preDetect = location.href.indexOf("from=singlemessage&isappinstalled=")
-      console.log(preDetect)
-      let ks = "http://testhuo.yonglibao.com/V2/Wxh5/testGame/?from=singlemessage&isappinstalled=0#/";
-      console.log(ks.split("#")[0].split("?")[0]);
+      if(preDetect > 0){
+        location.href = location.href.split("#")[0].split("?")[0]
+      }
 
       rem.resetRem();
       let ua = rem.myBrowser();
@@ -427,15 +513,16 @@
         let music = document.getElementById("music");
         music.src = buildUrl + "/music/PianoMan.mp3";
         music.play();
+
 //      发送给朋友圈
         wx.onMenuShareTimeline({
           title: '测测你是\"败家体\"还是\"持家体\"',
-          link: curl,
-          imgUrl: buildUrl + '/images/wxH5ShareIcon.png',
+          link:  location.href.split("#")[0],
+          imgUrl: location.protocol+"//"+location.host + '/h5Static/images/wxH5ShareIcon300.png',
           success: function () {
             // 用户确认分享后执行的回调函数
             _this.$http.get("/V2/Wxh5/statistics").then((data) => {
-                alert(data);
+              alert(data);
             })
           },
           cancel: function () {
@@ -444,13 +531,13 @@
           }
         });
 
-
-//        发送给朋友
+//      发送给朋友
         wx.onMenuShareAppMessage({
           title: '测测你是\"败家体\"还是\"持家体\"',
           desc: '此测试预言了我双11的表现！',
-          link: curl,
-          imgUrl: buildUrl + '/images/wxH5ShareIcon.png',
+          link:  location.href.split("#")[0],
+          imgUrl: location.protocol+"//"+location.host + '/h5Static/images/wxH5ShareIcon.png',
+
           type: 'link',
           dataUrl: '',
           success: function () {
@@ -462,6 +549,9 @@
             alert("取消分享")
           }
         });
+
+
+
 
 
       });
