@@ -7,15 +7,18 @@
         <div class="bigTitle"></div>
         <div class="sound" :class="PlayState ? 'start' : 'stop' " @click="changePlayState()"></div>
       </div>
+
       <div class="box2">
         <div class="girl "></div>
       </div>
+
       <div class="box3">
         <div class="ask ">
           <div class="arrow"></div>
           <div class="ask-n"></div>
         </div>
       </div>
+
     </div>
     <!--test start -->
     <div class="houseKeepingTest page " :class="houseKeepingTest ? 'animated fadeInRightBig':''"
@@ -81,7 +84,7 @@
     <!--result-->
     <div class="houseKeepingResult page" v-show="houseKeepingResult == true">
       <div class="hkr_header">
-        <div class="share shake-slow shake-constant" @click="shareFriendWithPyq()"></div>
+        <div class="share shake-slow shake-constant"></div>
       </div>
 
       <div class="hkr_body">
@@ -322,31 +325,27 @@
        */
       shareFriendWithPyq(){
         console.log("shareFriendWithPyq")
-        wx.ready(function () {
-          if (this.currentScore > 70) {
+        if (this.currentScore > 70) {
 //            this.result.v70
-            alert("v70")
-            wx.onMenuShareTimeline({
-              title: this.shareFriend.v70.text, // 分享标题
-              link: location.href,
-              imgUrl: "./static/assets/bigTitle.png" // 分享图标
-            });
-          } else if (this.currentScore > 40 && this.currentScore <= 70) {
-            alert("v40")
-            wx.onMenuShareTimeline({
-              title: this.shareFriend.v40.text, // 分享标题
-              link: location.href,
-              imgUrl: "分享图标的url,以http或https开头" // 分享图标
-            });
-          } else {
-            alert("v0")
-            wx.onMenuShareTimeline({
-              title: this.shareFriend.v0.text, // 分享标题
-              link: location.href,
-              imgUrl: "分享图标的url,以http或https开头" // 分享图标
-            });
-          }
-        })
+          alert("v70")
+          wx.onMenuShareTimeline({
+            title: this.shareFriend.v70.text, // 分享标题
+            link: location.href,
+            imgUrl: "./static/assets/bigTitle.png" // 分享图标
+          });
+        } else if (this.currentScore > 40 && this.currentScore <= 70) {
+          wx.onMenuShareTimeline({
+            title: this.shareFriend.v40.text, // 分享标题
+            link: location.href,
+            imgUrl: "分享图标的url,以http或https开头" // 分享图标
+          });
+        } else {
+          wx.onMenuShareTimeline({
+            title: this.shareFriend.v0.text, // 分享标题
+            link: location.href,
+            imgUrl: "分享图标的url,以http或https开头" // 分享图标
+          });
+        }
 
       },
       recordScore(s, index, selected, currentTest){
@@ -387,7 +386,7 @@
     mounted: function () {
       console.log("mounted")
       rem.resetRem();
-      var ua = rem.myBrowser();
+      let ua = rem.myBrowser();
 //      alert(ua)
       if (ua == "Safari") {
         $(".share").hide();
@@ -420,6 +419,9 @@
       });
 
 
+      let _this;
+
+
       wx.checkJsApi({
         jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'],
         success: function(data) {
@@ -431,22 +433,29 @@
 
       // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在 页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready 函数中。
       wx.ready(function () {
-        var music = document.getElementById("music");
-        music.src = buildUrl+"/music/PianoMan.mp3"
+        let music = document.getElementById("music");
+        music.src = buildUrl+"/music/PianoMan.mp3";
+        console.log(buildUrl);
         music.play();
 
 
         // 获取“分享到朋友圈”按钮点击状态及自定义分享内容接口
         wx.onMenuShareTimeline({
           title: '测测你是\"败家体\"还是\"持家体\"', // 分享标题
-          link: location.href,
-          imgUrl: "http://newhuo.yonglibao.com/static/images/global/logo.png" // 分享图标
+          link: "http://testhuo.yonglibao.com/V2/Wxh5/testGame#/",
+          imgUrl: "http://newhuo.yonglibao.com/static/images/global/logo.png", // 分享图标
+          success:function (data) {
+            _this.$http.get("/V2/Wxh5/statistics").then((data)=>{
+                console.log(data)
+            })
+          }
         });
+
         // 获取“分享给朋友”按钮点击状态及自定义分享内容接口
         wx.onMenuShareAppMessage({
           title: this.shareFriend.testState.text, // 分享标题
           desc: "测测你是\"败家体\"还是\"持家体\"", // 分享描述
-          link: location.href,
+          link: "http://testhuo.yonglibao.com/V2/Wxh5/testGame#/",
           imgUrl: "http://newhuo.yonglibao.com/static/images/global/logo.png", // 分享图标
           type: 'link', // 分享类型,music、video或link，不填默认为link
         });
@@ -460,8 +469,8 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less">
   @rem: 46.875;
-  @disance-left: -10px;
-  @disance-right: 10px;
+  @disance-left: -10rem/@rem;
+  @disance-right: 10rem/@rem;
 
   @font-face {
     font-family: "pangmen";
