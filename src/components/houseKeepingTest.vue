@@ -84,7 +84,7 @@
     <!--result-->
     <div class="houseKeepingResult page" v-show="houseKeepingResult == true">
       <div class="hkr_header">
-        <div class="share shake-slow shake-constant" @click="shareFriendWithPyq()"></div>
+        <div class="share shake-slow shake-constant"></div>
       </div>
 
       <div class="hkr_body">
@@ -139,6 +139,10 @@
         currentScore: 0,
         currentTest: 0,
         PlayState: false,
+        ShareResult:{
+            title:'测测你是\"败家体\"还是\"持家体\"',
+            desc:'此测试预言了我双11的表现！'
+        },
         cIcon: [
           "A",
           "B",
@@ -307,120 +311,7 @@
         this.testState = false;
         Object.assign(this.$data, this.$options.data())
       },
-      /**
-       * 戳这里 分享朋友圈
-       */
-      shareFriendWithPyq(){
 
-        console.log("shareFriendWithPyq")
-        if (this.testState == false) {
-
-        } else if (this.currentScore > 70 && this.testState == true) {
-//      发送给朋友圈
-          wx.onMenuShareTimeline({
-            title: this.shareFriend.v70.text, // 分享标题
-            link:  location.href.split("#")[0],
-            imgUrl: location.protocol+"//"+location.host + '/h5Static/images/wxH5ShareIcon300.png',
-            success: function () {
-              // 用户确认分享后执行的回调函数
-              _this.$http.get("/V2/Wxh5/statistics").then((data) => {
-                alert(data);
-              })
-            },
-            cancel: function () {
-              // 用户取消分享后执行的回调函数
-              alert("取消分享")
-            }
-          });
-//      发送给朋友
-          wx.onMenuShareAppMessage({
-            title: this.shareFriend.v70.text, // 分享标题
-            desc: '此测试预言了我双11的表现！',
-            link:  location.href.split("#")[0],
-            imgUrl: location.protocol+"//"+location.host + '/h5Static/images/wxH5ShareIcon.png',
-            type: 'link',
-            dataUrl: '',
-            success: function () {
-              // 用户确认分享后执行的回调函数
-              alert("分享成功")
-            },
-            cancel: function () {
-              // 用户取消分享后执行的回调函数
-              alert("取消分享")
-            }
-          });
-
-        } else if (this.currentScore > 40 && this.currentScore <= 70 && _this.testState == true) {
-//      发送给朋友圈
-          wx.onMenuShareTimeline({
-            title: this.shareFriend.v40.text, // 分享标题
-            link:  location.href.split("#")[0],
-            imgUrl: location.protocol+"//"+location.host + '/h5Static/images/wxH5ShareIcon300.png',
-            success: function () {
-              // 用户确认分享后执行的回调函数
-              this.$http.get("/V2/Wxh5/statistics").then((data) => {
-                alert(data);
-              })
-            },
-            cancel: function () {
-              // 用户取消分享后执行的回调函数
-              alert("取消分享")
-            }
-          });
-//      发送给朋友
-          wx.onMenuShareAppMessage({
-            title: this.shareFriend.v40.text, // 分享标题
-            desc: '此测试预言了我双11的表现！',
-            link:  location.href.split("#")[0],
-            imgUrl: location.protocol+"//"+location.host + '/h5Static/images/wxH5ShareIcon.png',
-            type: 'link',
-            dataUrl: '',
-            success: function () {
-              // 用户确认分享后执行的回调函数
-              alert("分享成功")
-            },
-            cancel: function () {
-              // 用户取消分享后执行的回调函数
-              alert("取消分享")
-            }
-          });
-        } else {
-//      发送给朋友圈
-          wx.onMenuShareTimeline({
-            title: _this.shareFriend.v0.text, // 分享标题
-            link:  location.href.split("#")[0],
-            imgUrl: location.protocol+"//"+location.host + '/h5Static/images/wxH5ShareIcon300.png',
-            success: function () {
-              // 用户确认分享后执行的回调函数
-              this.$http.get("/V2/Wxh5/statistics").then((data) => {
-                alert(data);
-              })
-            },
-            cancel: function () {
-              // 用户取消分享后执行的回调函数
-              alert("取消分享")
-            }
-          });
-//      发送给朋友
-          wx.onMenuShareAppMessage({
-            title: this.shareFriend.v0.text, // 分享标题
-            desc: '此测试预言了我双11的表现！',
-            link:  location.href.split("#")[0],
-            imgUrl: location.protocol+"//"+location.host + '/h5Static/images/wxH5ShareIcon.png',
-            type: 'link',
-            dataUrl: '',
-            success: function () {
-              // 用户确认分享后执行的回调函数
-              alert("分享成功")
-            },
-            cancel: function () {
-              // 用户取消分享后执行的回调函数
-              alert("取消分享")
-            }
-          });
-        }
-
-      },
       recordScore(s, index, selected, currentTest){
 //        this.$set(this.test[index])
         let _this = this;
@@ -443,6 +334,18 @@
             _this.PlayState = false;
             var music = document.getElementById("music");
             music.pause();
+
+            if (this.currentScore > 70 && this.testState == true) {
+              _this.ShareResult.title = _this.shareFriend.v70.text;
+              console.log(_this.ShareResult.title)
+            } else if (this.currentScore > 40 && this.currentScore <= 70 && _this.testState == true) {
+              _this.ShareResult.title = _this.shareFriend.v40.text;
+              console.log(_this.ShareResult.title)
+            } else {
+              _this.ShareResult.title = _this.shareFriend.v0.text;
+              console.log(_this.ShareResult.title)
+            }
+
           }
         }, 500)
 
@@ -451,11 +354,13 @@
 
     },
     mounted: function () {
-      let curl = location.href.split("#")[0];
-      curl = encodeURIComponent(location.href.split("#")[0])
       let URL = location.href.split("#")[0];
-      let preDetect = location.href.indexOf("from=singlemessage&isappinstalled=")
+      let preDetect = location.href.indexOf("from=singlemessage&isappinstalled=") ;
       if(preDetect > 0){
+        location.href = location.href.split("#")[0].split("?")[0]
+      }
+      let preDetect2 = location.href.indexOf("from=timeline&isappinstalled=");
+      if(preDetect2 > 0){
         location.href = location.href.split("#")[0].split("?")[0]
       }
 
@@ -474,10 +379,11 @@
         $(".ask").css("margin", "2.87333rem");
       }
       this.PlayState = true;
+      let _this;
       this.$http.get('/V2/AboutApp/getShareInfo?url=' + URL).then((data) => {
         // 微信配置
         wx.config({
-          debug: true,
+          debug: false,
           appId: data.body.r.appId,
           timestamp: data.body.r.timestamp,
           nonceStr: data.body.r.nonceStr,
@@ -490,71 +396,50 @@
             'onMenuShareWeibo'
           ]
         });
-      });
+        // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在 页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready 函数中。
+        wx.ready(function () {
+          let music = document.getElementById("music");
+          music.src = buildUrl + "/music/PianoMan.mp3";
+          music.play();
 
-
-      let _this;
-      wx.checkJsApi({
-        jsApiList: [
-          'onMenuShareTimeline',
-          'onMenuShareAppMessage',
-          'onMenuShareQQ',
-          'onMenuShareWeibo'
-        ],
-        success: function (data) {
-          // 以键值对的形式返回，可用的api值true，不可用为false
-          // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
-          alert(data)
-        }
-      });
-
-      // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在 页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready 函数中。
-      wx.ready(function () {
-        let music = document.getElementById("music");
-        music.src = buildUrl + "/music/PianoMan.mp3";
-        music.play();
-
-//      发送给朋友圈
-        wx.onMenuShareTimeline({
-          title: '测测你是\"败家体\"还是\"持家体\"',
-          link:  location.href.split("#")[0],
-          imgUrl: location.protocol+"//"+location.host + '/h5Static/images/wxH5ShareIcon300.png',
-          success: function () {
-            // 用户确认分享后执行的回调函数
-            _this.$http.get("/V2/Wxh5/statistics").then((data) => {
-              alert(data);
-            })
-          },
-          cancel: function () {
-            // 用户取消分享后执行的回调函数
-            alert("取消分享")
-          }
-        });
+        //      发送给朋友圈
+          wx.onMenuShareTimeline({
+            title: this.ShareResult.title,
+            link:  location.href.split("#")[0],
+            imgUrl: location.protocol+"//"+location.host + '/h5Static/images/wxH5ShareIcon300.png',
+            success: function () {
+              _this.$http.get("/V2/Wxh5/statistics").then((data) => {})
+            },
+            cancel: function () {
+              // 用户取消分享后执行的回调函数
+              alert("取消分享")
+            }
+          });
 
 //      发送给朋友
-        wx.onMenuShareAppMessage({
-          title: '测测你是\"败家体\"还是\"持家体\"',
-          desc: '此测试预言了我双11的表现！',
-          link:  location.href.split("#")[0],
-          imgUrl: location.protocol+"//"+location.host + '/h5Static/images/wxH5ShareIcon.png',
+          wx.onMenuShareAppMessage({
+            title: '测测你是\"败家体\"还是\"持家体\"A',
+            desc: '此测试预言了我双11的表现！',
+            link:  location.href.split("#")[0],
+            imgUrl: location.protocol+"//"+location.host + '/h5Static/images/wxH5ShareIcon.png',
+            type: 'link',
+            dataUrl: '',
+            success: function () {
+              // 用户确认分享后执行的回调函数
 
-          type: 'link',
-          dataUrl: '',
-          success: function () {
-            // 用户确认分享后执行的回调函数
-            alert("分享成功")
-          },
-          cancel: function () {
-            // 用户取消分享后执行的回调函数
-            alert("取消分享")
-          }
+            },
+            cancel: function () {
+              // 用户取消分享后执行的回调函数
+              alert("取消分享")
+            }
+          });
+
         });
-
-
-
-
-
       });
+
+
+
+
 
     },
 
