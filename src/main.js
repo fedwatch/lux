@@ -4,8 +4,9 @@ import Vue from 'vue'
 import VueResource from 'vue-resource'
 import App from './App'
 import router from './router'
-import 'normalize.css'
-import 'animate.css'
+import 'normalize.css';
+import 'animate.css';
+import "csshake";
 
 Vue.config.productionTip = false
 

@@ -130,6 +130,7 @@
   import $ from "n-zepto";
   import "swiper";
   import rem  from "../../static/utils/resetRem";
+
   //  import appShare  from "../../static/utils/appShare";
   //  require("");
   //  require("/static/utils/resetRem");
@@ -327,7 +328,6 @@
         console.log("shareFriendWithPyq")
         if (this.currentScore > 70) {
 //            this.result.v70
-          alert("v70")
           wx.onMenuShareTimeline({
             title: this.shareFriend.v70.text, // 分享标题
             link: location.href,
@@ -353,6 +353,7 @@
         let _this = this;
         this.test[currentTest].a[index].selected = !selected;
 
+
         setTimeout(function () {
           if (_this.currentScore > 80) {
             alert("游戏出bug了");
@@ -370,9 +371,10 @@
             _this.PlayState = false;
             var music = document.getElementById("music");
             music.pause();
-
           }
         }, 500)
+
+
       }
 
     },
@@ -400,15 +402,22 @@
         $(".ask").css("margin", "2.87333rem");
       }
       this.PlayState = true;
-
-      this.$http.get('/V2/AboutApp/getShareInfo?url=' + location.href).then((data) => {
+      var URL = location.href.split("#")[0];
+      this.$http.get('/V2/AboutApp/getShareInfo?url='+URL).then((data) => {
         // 微信配置
         wx.config({
+          debug: true,
           appId: data.body.r.appId,
           timestamp: data.body.r.timestamp,
           nonceStr: data.body.r.nonceStr,
           signature: data.body.r.signature,
-          jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'] // 功能列表，我们要使用JS-SDK的什么功能
+          jsApiList: [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ',
+            'onMenuShareWeibo'
+          ]
         });
 
         console.log(data.body.r.appId);
@@ -423,11 +432,16 @@
 
 
       wx.checkJsApi({
-        jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'],
+        jsApiList: [
+          'onMenuShareTimeline',
+          'onMenuShareAppMessage',
+          'onMenuShareQQ',
+          'onMenuShareWeibo'
+        ],
         success: function(data) {
           // 以键值对的形式返回，可用的api值true，不可用为false
           // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
-          console.log(data)
+          alert(data)
         }
       });
 
@@ -442,23 +456,41 @@
         // 获取“分享到朋友圈”按钮点击状态及自定义分享内容接口
         wx.onMenuShareTimeline({
           title: '测测你是\"败家体\"还是\"持家体\"', // 分享标题
-          link: "http://testhuo.yonglibao.com/V2/Wxh5/testGame#/",
-          imgUrl: "http://newhuo.yonglibao.com/static/images/global/logo.png", // 分享图标
-          success:function (data) {
+          link: 'http://testhuo.yonglibao.com/V2/Wxh5/testGame/', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+          imgUrl: 'http://testhuo.yonglibao.com/static/images/global/logo.png', // 分享图标
+          success: function () {
+            alert("分享成功")
+            // 用户确认分享后执行的回调函数
             _this.$http.get("/V2/Wxh5/statistics").then((data)=>{
-                console.log(data)
+              console.log(data)
             })
+            alert("Wxh5 statistics")
+          },
+          cancel: function () {
+            // 用户取消分享后执行的回调函数
+            alert("取消分享")
           }
         });
 
-        // 获取“分享给朋友”按钮点击状态及自定义分享内容接口
+
+
         wx.onMenuShareAppMessage({
-          title: this.shareFriend.testState.text, // 分享标题
-          desc: "测测你是\"败家体\"还是\"持家体\"", // 分享描述
-          link: "http://testhuo.yonglibao.com/V2/Wxh5/testGame#/",
-          imgUrl: "http://newhuo.yonglibao.com/static/images/global/logo.png", // 分享图标
+          title: _this.shareFriend.testState.text, // 分享标题
+          desc: '测测你是\"败家体\"还是\"持家体\"', // 分享描述
+          link: 'http://testhuo.yonglibao.com/V2/Wxh5/testGame#/', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+          imgUrl: 'http://testhuo.yonglibao.com/static/images/global/logo.png', // 分享图标
           type: 'link', // 分享类型,music、video或link，不填默认为link
+          dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+          success: function () {
+            // 用户确认分享后执行的回调函数
+            alert("分享成功")
+          },
+          cancel: function () {
+            // 用户取消分享后执行的回调函数
+            alert("取消分享")
+          }
         });
+
       });
 
     },
