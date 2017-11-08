@@ -449,11 +449,8 @@
       wx.ready(function () {
         let music = document.getElementById("music");
         music.src = buildUrl+"/music/PianoMan.mp3";
-        console.log(buildUrl);
         music.play();
 
-
-        // 获取“分享到朋友圈”按钮点击状态及自定义分享内容接口
         wx.onMenuShareTimeline({
           title: '测测你是\"败家体\"还是\"持家体\"', // 分享标题
           link: 'http://testhuo.yonglibao.com/V2/Wxh5/testGame/', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
@@ -462,7 +459,7 @@
             alert("分享成功")
             // 用户确认分享后执行的回调函数
             _this.$http.get("/V2/Wxh5/statistics").then((data)=>{
-              console.log(data)
+
             })
             alert("Wxh5 statistics")
           },
@@ -472,12 +469,10 @@
           }
         });
 
-
-
         wx.onMenuShareAppMessage({
           title: _this.shareFriend.testState.text, // 分享标题
           desc: '测测你是\"败家体\"还是\"持家体\"', // 分享描述
-          link: 'http://testhuo.yonglibao.com/V2/Wxh5/testGame#/', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+          link: 'http://testhuo.yonglibao.com/V2/Wxh5/testGame/', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
           imgUrl: 'http://testhuo.yonglibao.com/static/images/global/logo.png', // 分享图标
           type: 'link', // 分享类型,music、video或link，不填默认为link
           dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
@@ -490,6 +485,7 @@
             alert("取消分享")
           }
         });
+
 
       });
 
