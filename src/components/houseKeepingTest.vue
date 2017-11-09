@@ -403,6 +403,7 @@
     },
     mounted: function () {
       let URL = location.href.split("#")[0];
+      let AURL = location.href;
       let preDetect = location.href.indexOf("from=singlemessage&isappinstalled=");
       if (preDetect > 0) {
         location.href = location.href.split("#")[0].split("?")[0]
@@ -415,6 +416,19 @@
       if (preDetect3 > 0) {
         location.href = location.href.split("#")[0].split("?")[0]
       }
+//
+//      let preDetect4 = location.href.indexOf("from=singlemessage")
+//      if (preDetect4 > 0) {
+//        location.href = location.href.split("#")[0].split("?")[0]
+//      }
+//      let preDetect5 = location.href.indexOf("from=timeline")
+//      if (preDetect5 > 0) {
+//        location.href = location.href.split("#")[0].split("?")[0]
+//      }
+//      let preDetect6 = location.href.indexOf("from=groupmessage")
+//      if (preDetect6 > 0) {
+//        location.href = location.href.split("#")[0].split("?")[0]
+//      }
 
       rem.resetRem();
       let ua = rem.myBrowser();
@@ -430,8 +444,9 @@
         $(".hkr_body").css("top", "2.77333rem");
         $(".ask").css("margin", "2.87333rem");
       } else if (ua == "Android") {
-        $(".ask").css("margin", "2.87333rem");
+        $(".ask").css("margin", "0.87333rem");
         $(".hkr_body").css("top", "2.77333rem");
+        $(".testPage_body").css("margin", "1.70667rem 1.06667rem");
       }
       this.PlayState = true;
       let _this;
@@ -481,54 +496,54 @@
         music.play();
 
 
-        _this.wxShare({
-          title: _this.ShareResult.title,
-          desc: '此测试预言了我双11的表现！',
-          link: location.href.split("#")[0] + '?appRandom=' + Math.floor(Math.random() * 10000),
-          imgUrl: location.protocol + "//" + location.host + '/h5Static/images/wxH5ShareIcon.png',
-          success: function () {  //可以不传
-            // 用户确认分享后执行的回调函数
-            _this.$http.get("/V2/Wxh5/statistics").then((data) => {
-
-            })
-          },
-          cancel: function () {  //可以不传
-          }
-        })
-//
-//        //      发送给朋友圈
-//        wx.onMenuShareTimeline({
-//          title:  _this.ShareResult.title,
-//          link: location.href.split("#")[0] + '?appRandom=' + Math.floor(Math.random() * 10000),
-//          imgUrl: location.protocol + "//" + location.host + '/h5Static/images/wxH5ShareIcon300.png',
-//          success: function () {
-//            _this.$http.get("/V2/Wxh5/statistics").then((data) => {
-//            })
-//          },
-//          cancel: function () {
-//            // 用户取消分享后执行的回调函数
-//            alert("取消分享")
-//          }
-//        });
-//
-//        //      发送给朋友
-//        wx.onMenuShareAppMessage({
-//          title:   _this.ShareResult.title,
+//        _this.wxShare({
+//          title: _this.ShareResult.title,
 //          desc: '此测试预言了我双11的表现！',
-//          link: location.href.split("#")[0] + Math.floor(Math.random() * 10000)+'?appRandom=' + Math.floor(Math.random() * 10000),
+//          link: location.href.split("#")[0] + '?appRandom=' + Math.floor(Math.random() * 10000),
 //          imgUrl: location.protocol + "//" + location.host + '/h5Static/images/wxH5ShareIcon.png',
-//          type: 'link',
-//          success: function () {
+//          success: function () {  //可以不传
 //            // 用户确认分享后执行的回调函数
 //            _this.$http.get("/V2/Wxh5/statistics").then((data) => {
 //
 //            })
 //          },
-//          cancel: function () {
-//            // 用户取消分享后执行的回调函数
-//            alert("取消分享")
+//          cancel: function () {  //可以不传
 //          }
-//        });
+//        })
+//
+        //      发送给朋友圈
+        wx.onMenuShareTimeline({
+          title: _this.ShareResult.title,
+          link: location.href.split("#")[0]  + '?appRandom=' + Math.floor(Math.random() * 10000),
+          imgUrl: location.protocol + "//" + location.host + '/h5Static/images/wxH5ShareIcon300.png',
+          success: function () {
+            _this.$http.get("/V2/Wxh5/statistics").then((data) => {
+            })
+          },
+          cancel: function () {
+            // 用户取消分享后执行的回调函数
+            alert("取消分享")
+          }
+        });
+
+        //      发送给朋友
+        wx.onMenuShareAppMessage({
+          title: _this.ShareResult.title,
+          desc: '此测试预言了我双11的表现！',
+          link: location.href.split("#")[0] + '?appRandom=' + Math.floor(Math.random() * 10000),
+          imgUrl: location.protocol + "//" + location.host + '/h5Static/images/wxH5ShareIcon.png',
+          type: 'link',
+          success: function () {
+            // 用户确认分享后执行的回调函数
+            _this.$http.get("/V2/Wxh5/statistics").then((data) => {
+
+            })
+          },
+          cancel: function () {
+            // 用户取消分享后执行的回调函数
+            alert("取消分享")
+          }
+        });
 
       });
 
