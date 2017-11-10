@@ -33,7 +33,11 @@ let rem = {
     } //判断是否Safari浏览器
     if (userAgent.indexOf("micromessenger") > -1) {
       return "wxApp";
-    } //判断是否Safari浏览器
+    }
+    if (userAgent.indexOf("android") > -1) {
+      return "Android";
+    }
+    //判断是否Safari浏览器
     if (userAgent.indexOf("compatible") > -1 && userAgent.indexOf("msie") > -1 && !isOpera) {
       return "IE";
     }

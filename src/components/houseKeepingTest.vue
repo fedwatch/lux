@@ -1,5 +1,6 @@
 <template>
   <div id="houseKeepingTest">
+    <!--Kao-->
     <!--h5 Start-->
     <div class="houseKeepingIndex page" v-show="houseKeepingIndex == true" @touchmove="beginTest()">
       <div class="box1">
@@ -89,10 +90,10 @@
 
       <div class="hkr_body">
         <h1 class="bodyTxt" :data-value=currentScore><span>{{currentScore}}</span>分</h1>
-        <div class="bodyStyle" v-if="this.currentScore > 70">
+        <div class="bodyStyle" v-if="this.currentScore >= 70">
           <div class="top3"></div>
         </div>
-        <div class="bodyStyle" v-else-if="this.currentScore > 40 && this.currentScore <= 70">
+        <div class="bodyStyle" v-else-if="this.currentScore > 40 && this.currentScore < 70">
           <div class="top2"></div>
         </div>
         <div class="bodyStyle" v-else="this.currentScore > 0 && this.currentScore <= 40">
@@ -310,6 +311,8 @@
       },
 
       wxShare(dataForWeixin){
+        let _this = this;
+        this.$http.get("/V2/Wxh5/statistics").then((data) => {});
         wx.ready(function () {
           // 2. 分享接口
           // 2.1 监听“分享给朋友”，按钮点击、自定义分享内容及分享结果接口
@@ -373,6 +376,8 @@
           _this.currentScore = _this.currentScore + parseInt(s);
           _this.currentTest += 1;
 
+          console.log(_this.currentScore);
+
 
           if (_this.currentTest == 8) {
             _this.houseKeepingIndex = false;
@@ -382,15 +387,15 @@
             var music = document.getElementById("music");
             music.pause();
 
-            if (this.currentScore > 70 && this.testState == true) {
+            if (_this.currentScore >= 70 && _this.testState == true) {
               _this.ShareResult.title = _this.shareFriend.v70.text;
               document.title = _this.ShareResult.title
               console.log(_this.ShareResult.title)
-            } else if (this.currentScore > 40 && this.currentScore <= 70 && _this.testState == true) {
+            } else if (_this.currentScore > 40 && _this.currentScore < 70 && _this.testState == true) {
               _this.ShareResult.title = _this.shareFriend.v40.text;
               document.title = _this.ShareResult.title
               console.log(_this.ShareResult.title)
-            } else {
+            } else if(_this.currentScore <= 40  && _this.testState == true){
               _this.ShareResult.title = _this.shareFriend.v0.text;
               document.title = _this.ShareResult.title
               console.log(_this.ShareResult.title)
@@ -416,44 +421,50 @@
       if (preDetect3 > 0) {
         location.href = location.href.split("#")[0].split("?")[0]
       }
-//
-//      let preDetect4 = location.href.indexOf("from=singlemessage")
-//      if (preDetect4 > 0) {
-//        location.href = location.href.split("#")[0].split("?")[0]
-//      }
-//      let preDetect5 = location.href.indexOf("from=timeline")
-//      if (preDetect5 > 0) {
-//        location.href = location.href.split("#")[0].split("?")[0]
-//      }
-//      let preDetect6 = location.href.indexOf("from=groupmessage")
-//      if (preDetect6 > 0) {
-//        location.href = location.href.split("#")[0].split("?")[0]
-//      }
+
+      let preDetect4 = location.href.indexOf("from=singlemessage")
+      if (preDetect4 > 0) {
+        location.href = location.href.split("#")[0].split("?")[0]
+      }
+      let preDetect5 = location.href.indexOf("from=timeline")
+      if (preDetect5 > 0) {
+        location.href = location.href.split("#")[0].split("?")[0]
+      }
+      let preDetect6 = location.href.indexOf("from=groupmessage")
+      if (preDetect6 > 0) {
+        location.href = location.href.split("#")[0].split("?")[0]
+      }
+
+
+
+      setTimeout(function(){
+        $.ajax({
+          method:"get",
+          url:"/V2/Wxh5/statistics",
+          success:function(){
+
+          }
+        })
+      },1000);
+
+
+//      alert(window.devicePixelRatio)
 
       rem.resetRem();
       let ua = rem.myBrowser();
-//      alert(ua)
       if (ua == "Safari") {
         $(".share").hide();
-        $(".ask").css("margin", "2.77333rem");
-        $(".girl").css("top", " 11.09333333rem");
-        $(".testPage_body").css("margin", "1.70667rem 1.06667rem");
-        $(".goldicon").css("top", "0.64rem");
-        $(".water").css("top", "0rem");
-      } else if (ua == "wxApp") {
-        $(".hkr_body").css("top", "2.77333rem");
-        $(".ask").css("margin", "2.87333rem");
-      } else if (ua == "Android") {
-        $(".ask").css("margin", "0.87333rem");
-        $(".hkr_body").css("top", "2.77333rem");
-        $(".testPage_body").css("margin", "1.70667rem 1.06667rem");
       }
+
       this.PlayState = true;
       let _this;
-      this.$http.get('/V2/AboutApp/getShareInfo?url=' + URL).then((data) => {
+
+
+      this.$http.get('/V2/AboutApp/getShareInfo?url=' + encodeURIComponent(URL)).then((data) => {
+
         // 微信配置
         wx.config({
-          debug: true,
+          debug: false,
           appId: data.body.r.appId,
           timestamp: data.body.r.timestamp,
           nonceStr: data.body.r.nonceStr,
@@ -467,19 +478,19 @@
           ]
         });
 
-        wx.checkJsApi({
-          jsApiList: [
-            'onMenuShareTimeline',
-            'onMenuShareAppMessage',
-            'onMenuShareQQ',
-            'onMenuShareWeibo'
-          ],
-          success: function (data) {
-            // 以键值对的形式返回，可用的api值true，不可用为false
-            // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
-            alert(data)
-          }
-        });
+//        wx.checkJsApi({
+//          jsApiList: [
+//            'onMenuShareTimeline',
+//            'onMenuShareAppMessage',
+//            'onMenuShareQQ',
+//            'onMenuShareWeibo'
+//          ],
+//          success: function (data) {
+//            // 以键值对的形式返回，可用的api值true，不可用为false
+//            // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+//            alert(data)
+//          }
+//        });
 
       });
 
@@ -496,10 +507,10 @@
         music.play();
 
 
-//        _this.wxShare({
+//        this.wxShare({
 //          title: _this.ShareResult.title,
 //          desc: '此测试预言了我双11的表现！',
-//          link: location.href.split("#")[0] + '?appRandom=' + Math.floor(Math.random() * 10000),
+//          link: encodeURIComponent(location.href.split("#")[0] + '?appRandom=' + Math.floor(Math.random() * 10000)),
 //          imgUrl: location.protocol + "//" + location.host + '/h5Static/images/wxH5ShareIcon.png',
 //          success: function () {  //可以不传
 //            // 用户确认分享后执行的回调函数
@@ -514,7 +525,7 @@
         //      发送给朋友圈
         wx.onMenuShareTimeline({
           title: _this.ShareResult.title,
-          link: location.href.split("#")[0]  + '?appRandom=' + Math.floor(Math.random() * 10000),
+          link: encodeURIComponent(location.href.split("#")[0] + '?appRandom=' + Math.floor(Math.random() * 10000)),
           imgUrl: location.protocol + "//" + location.host + '/h5Static/images/wxH5ShareIcon300.png',
           success: function () {
             _this.$http.get("/V2/Wxh5/statistics").then((data) => {
@@ -530,13 +541,12 @@
         wx.onMenuShareAppMessage({
           title: _this.ShareResult.title,
           desc: '此测试预言了我双11的表现！',
-          link: location.href.split("#")[0] + '?appRandom=' + Math.floor(Math.random() * 10000),
+          link: encodeURIComponent(location.href.split("#")[0] + '?appRandom=' + Math.floor(Math.random() * 10000)),
           imgUrl: location.protocol + "//" + location.host + '/h5Static/images/wxH5ShareIcon.png',
           type: 'link',
           success: function () {
             // 用户确认分享后执行的回调函数
             _this.$http.get("/V2/Wxh5/statistics").then((data) => {
-
             })
           },
           cancel: function () {
@@ -1059,7 +1069,7 @@
       }
 
       .top1 {
-        background: url("../../static/assets/top1.png") no-repeat;
+        background: url("../../static/assets/top2.png") no-repeat;
         background-size: 100% 100%;
         width: 520rem/@rem;
         height: 330rem/@rem;
@@ -1067,7 +1077,7 @@
 
       }
       .top2 {
-        background: url("../../static/assets/top2.png") no-repeat;
+        background: url("../../static/assets/top1.png") no-repeat;
         background-size: 100% 100%;
         width: 520rem/@rem;
         height: 330rem/@rem;
@@ -1108,54 +1118,6 @@
       opacity: 0;
     }
   }
-
-  /*  @keyframes waterAnimate {
-      20% {
-        background: url("../../static/assets/water_1.png") no-repeat;
-        background-size: 100% 100%;
-        width: 442rem/@rem;
-        height: 895rem/@rem;
-        z-index: 1;
-      }
-      70% {
-        background: url("../../static/assets/water_2.png") no-repeat;
-        background-size: 100% 100%;
-        width: 442rem/@rem;
-        height: 895rem/@rem;
-        z-index: 1;
-      }
-      100% {
-        background: url("../../static/assets/water_3.png") no-repeat;
-        background-size: 100% 100%;
-        width: 442rem/@rem;
-        height: 895rem/@rem;
-        z-index: 1;
-      }
-    }*/
-
-  /*@-webkit-keyframes  waterAnimate {
-    20% {
-      background: url("../../static/assets/water_1.png") no-repeat;
-      background-size: 100% 100%;
-      width: 442rem/@rem;
-      height: 895rem/@rem;
-      z-index: 1;
-    }
-    70% {
-      background: url("../../static/assets/water_2.png") no-repeat;
-      background-size: 100% 100%;
-      width: 442rem/@rem;
-      height: 895rem/@rem;
-      z-index: 1;
-    }
-    100% {
-      background: url("../../static/assets/water_3.png") no-repeat;
-      background-size: 100% 100%;
-      width: 442rem/@rem;
-      height: 895rem/@rem;
-      z-index: 1;
-    }
-  }*/
 
   @keyframes eyeAni {
     0% {
@@ -1308,6 +1270,80 @@
       -moz-transform: rotate(10deg); /* Firefox */
       -webkit-transform: rotate(10deg); /* Safari 和 Chrome */
       -o-transform: rotate(10deg); /* Opera */
+    }
+  }
+
+  // 荣耀 6 PLUS
+  @media (device-width: 360px)and(device-height: 640px) and(-webkit-min-device-pixel-ratio: 3) {
+    .water {
+      top: 0;
+    }
+
+    .goldicon {
+      top: 0.64rem;
+    }
+
+    .ask {
+      width: 508rem/@rem !important;
+      height: 126rem/@rem;
+      text-align: center;
+      margin: 130rem/@rem auto !important;
+    }
+
+    .testPage_body {
+      margin: 1.30667rem 1.06667rem;
+    }
+
+    .button {
+      background: url("../../static/assets/button.png") no-repeat;
+      background-size: 100% 100%;
+      width: 394rem/@rem;
+      height: 175rem/@rem;
+      position: absolute;
+      bottom: 10rem/@rem;
+      left: 198rem/@rem;
+    }
+
+    .hkr_body {
+      /*top:2.77333rem!important;*/
+    }
+  }
+
+  @media (device-height: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+    /* 兼容iphone4/4s */
+
+  }
+
+  @media (device-height: 568px) and (-webkit-min-device-pixel-ratio: 2) {
+    /* 兼容iphone5 */
+
+  }
+
+  @media (device-height: 667px) and (-webkit-min-device-pixel-ratio: 2) {
+    /* 兼容iphone6 */
+
+  }
+
+  @media (device-height: 736px) and (-webkit-min-device-pixel-ratio: 2) {
+    /* 兼容iphone6 Plus */
+    .ask {
+      margin: 2.77333rem;
+    }
+
+    .girl {
+      top: 11.09333333rem;
+    }
+
+    .testPage_body {
+      margin: 1.70667rem 1.06667rem;
+    }
+
+    .goldicon {
+      top: 0.64rem;
+    }
+
+    .water {
+      top: 0;
     }
   }
 
