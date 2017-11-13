@@ -1,18 +1,20 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import houseKeepingTest from '../components/houseKeepingTest.vue'
+import notFound from '../components/notFound.vue'
 
 Vue.use(Router)
 
 export default new Router({
 /*  mode: 'history',*/
-  hashbang:false,
+  // hashbang:false,
   routes: [
     {
       path: '/',
       name: 'houseKeepingTest',
       component: houseKeepingTest
-    }
+    },
+    { path: '*', component: notFound }
   ],
 
   beforeRouteUpdate (to, from, next) {

@@ -9,6 +9,7 @@ import 'animate.css';
 import "csshake";
 
 Vue.config.productionTip = false
+// Vue.prototype.router = router;
 
 Vue.use(VueResource);
 
