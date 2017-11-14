@@ -122,7 +122,6 @@
   import "swiper";
   import rem  from "../../static/utils/resetRem";
 
-
   let buildUrl = "";
   if (process.env.NODE_ENV == "development") {
     buildUrl = "/static/";

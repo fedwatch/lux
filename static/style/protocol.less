@@ -1,0 +1,57 @@
+@import './reset.less';
+
+@rem: 23.4375;
+body{
+	padding: 15rem/@rem;
+	background: #fff;
+	.wrap{
+		width: 100%;
+		margin: 0 auto;
+	}
+	h2{
+		margin: 20rem/@rem 0;
+		font-size: 18rem/@rem;
+		text-align: center;
+		line-height: 30rem/@rem;
+		color: #2f2f2f;
+		font-weight: bold;
+	}
+	h3{
+		margin: 15rem/@rem 0 10rem/@rem;
+		font-size: 16rem/@rem;
+		line-height: 20rem/@rem;
+		color: #2f2f2f;
+		font-weight: bold;
+	}
+	p{
+		margin-bottom: 15rem/@rem;
+		text-align: justify;
+		font-size: 15rem/@rem;
+		line-height: 26rem/@rem;
+		color: #2f2f2f;
+	}
+}
+
+@media (min-width: 480px){
+	body{
+		padding: 20px 50px;
+		.wrap{
+			width: 80%;
+		}
+		h2{
+			margin: 20px 0;
+			font-size: 18px;
+			line-height: 30px;
+		}
+		h3{
+			margin: 15px 0 10px;
+			font-size: 16px;
+
+		}
+		p{
+			margin-bottom: 15px;
+			font-size: 15px;
+			line-height: 26px;
+		}
+	}
+}

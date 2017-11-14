@@ -1,0 +1,161 @@
+.turntable-bg{
+    background: url(/static/images/integral/draw-top.jpg?v1) no-repeat #046199;
+    background-size: 100% auto;
+}
+.turntable-myLottery{
+    position: absolute;
+    width:2rem;
+    top:0;
+    right:1rem;
+    -webkit-transform:rotate(10deg);
+    transform:rotate(10deg);
+    -webkit-transform-origin:50% 0;
+    transform-origin:50% 0;
+    animation-name: leftRight;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    -webkit-animation-name: leftRight;
+    -webkit-animation-duration:3s;
+    -webkit-animation-iteration-count: infinite;
+    img{
+        width: 100%;
+    }
+}
+@-webkit-keyframes leftRight
+{
+    0%{-webkit-transform:rotate(10deg);transform:rotate(10deg);}
+    50% {-webkit-transform:rotate(-10deg);transform:rotate(-10deg);}
+    100%{-webkit-transform:rotate(10deg);transform:rotate(10deg);}
+}
+@keyframes leftRight
+{
+    0%{-webkit-transform:rotate(10deg);transform:rotate(10deg);}
+    50% {-webkit-transform:rotate(-10deg);transform:rotate(-10deg);}
+    100%{-webkit-transform:rotate(10deg);transform:rotate(10deg);}
+}
+.turntable{
+    width:98%;
+    margin:7.35rem auto 0;
+    position: relative;
+    img{
+        width:100%;
+    }
+
+}
+.wheel-btn{
+    width:32.8%;
+    height:40%;
+    position: absolute;
+    top:50%;
+    left:50%;
+    margin:-25.5% 0 0 -16%;
+    img{
+        width:100%;
+    }
+}
+.wheel-ico{
+    position: absolute;
+    width: 95%;
+    bottom:0;
+    img{
+        width:100%;
+    }
+}
+.wheel-foot{
+    width:61%;
+    margin:-.65rem auto;
+    height:.6rem;
+    background:#035382;
+    border-radius:50%;
+}
+.wheel-rotate{
+    animation: wheelRotate 2s linear infinite;
+    -webkit-animation: wheelRotate 2s linear infinite;
+}
+@-webkit-keyframes wheelRotate
+{
+    0%{-webkit-transform:rotate(0deg);transform:rotate(0deg);}
+    100%{-webkit-transform:rotate(360deg);transform:rotate(360deg);}
+}
+@keyframes wheelRotate
+{
+    0%{-webkit-transform:rotate(0deg);transform:rotate(0deg);}
+    100%{-webkit-transform:rotate(360deg);transform:rotate(360deg);}
+}
+.turntable-text{
+    height:1.100rem;   
+    line-height:1.100rem;
+    .font-s(0.6rem);
+    color:#046199;
+    background:#fdef04;
+    background-size:100% 100%;
+    overflow:hidden;
+    border:1px solid #fdef04;
+    margin:1.2rem 0.625rem 0;
+    .pos(r);
+    p{
+        .pos(a);
+        left:0;
+        white-space: nowrap;
+        margin-left:5px;
+    }
+}
+.turntable-box{
+    dl{
+        margin:0 .625rem .5rem .625rem;
+        font-size:.6rem;
+        color:#fff
+    }
+    dt{
+        padding-top:.4rem;
+        line-height: 1rem;
+    }
+    dd{
+        color:#ccd8e4;
+        line-height:.8rem;
+    }
+}
+.modal{
+    top:28%;
+    opacity:0;
+    .btns{
+        .btn-red-w{
+            width:98%;
+        }
+    }
+}
+.modal p{
+    .tc();
+}
+.desktop{
+    opacity:0;
+}
+.load-tips{
+    width:3rem;
+    height:3rem;
+    line-height:3rem;
+    .tc();
+    .pos(a);
+    top:50%;
+    left:50%;
+    margin:-1.5rem 0 0 -1.5rem;
+    background:rgba(0,0,0,0.6);
+    border-radius:8px;
+    display: none;
+    img{
+        width:1.3rem;
+        height:1.3rem;
+        vertical-align: middle;
+    }
+}
+.turntable-foot{
+    .tc();
+    padding-bottom:0.5rem;
+    color: #8ad3ff;
+    font-size: .6rem;
+    line-height: 1.1rem;
+}
+.turntable-bt{
+    width:100%;
+    display: block;
+}

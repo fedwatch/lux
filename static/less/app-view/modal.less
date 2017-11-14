@@ -1,0 +1,104 @@
+//弹出框
+@charset "UTF-8";
+.modal{
+	width:90%;
+	overflow: hidden;
+	position: fixed;
+	top: 20%;
+	left: 5%;
+	display: none;
+	background-color: #fff;
+	border-radius: .4rem;
+	z-index: 99;
+	h2{
+		width: 100%;
+		padding: .75rem 0 .8rem;
+		letter-spacing: 3px;
+		font-weight: normal;
+		border-bottom: 1px solid #d2d2d2;
+		color: #666;
+		font-size: .8rem;
+		text-align: center;
+		background-color: #f5f5f5;
+		.border-top-radius(@radius: .4rem);
+	}
+	.content{
+		padding: .8rem .6rem 1rem;
+		p{
+			color: #666;
+			font-size: .7rem;
+			text-align: center;
+			span{
+				margin-right: .5rem;
+			}
+		}
+		.t-center{
+			text-align: center;
+		}
+		.t-text{
+			text-align: left;
+		}
+		.btn-red{
+			width: 90%;
+			margin: 1rem auto 0;
+			letter-spacing: .4rem;
+		}
+	}
+	.btns{
+		padding: 0 1rem 1rem;
+		.btn-white,.btn-red{
+			width: 45%;
+		}
+		.btn-red-w{
+			width: 98%;
+		}
+		.btn-gray-w{
+			width: 98%;
+		}
+	}
+	.btn{
+		text-align: center;
+		width: 100%;
+		height: 2.125rem;
+		background-color: #ccc;
+		border: 1px solid #ccc;
+		line-height: 2.125rem;
+		text-align: center;
+		outline: none;
+		color: #333;
+		font-family:  "Microsoft Yahei","微软雅黑";
+		font-size: .85rem;
+		border-radius: .2rem;
+	}
+	.btn-white{
+		margin-right: 6%;
+		background-color: #fff;
+		border-color: #d2d2d2;
+	}
+	.btn-red{
+		color: #fff;
+		background-color: #e7343a;
+		border-color: #e7343a;
+	}
+	.btn-gray{
+		color: #fff;
+		background-color: #ccc;
+		border-color: #ccc;
+	}
+	.btn-white,.btn-red{
+		width: 45%;
+	}
+	.btn-gray-w{
+		width: 98%;
+	}
+}
+.desktop{
+	z-index: 10;
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.54);
+}

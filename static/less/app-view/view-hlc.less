@@ -1,0 +1,977 @@
+.btn-function(@color; @background) {
+    color: @color;
+    background-color: @background;
+    border:1px solid darken(@background, 2%);
+    &:hover,
+    &:focus,
+    &:active,
+    &.active{
+        background-color: darken(@background, 3%);
+        border-color: darken(@background, 3%);
+        box-shadow:0 1px 1px rgba(0,0,0,0.1);
+    }
+    &.disabled,
+    &[disabled]{
+        background-color: luma(@background, -2);
+        border-color: luma(@background, -2);
+    }
+}
+html{font-size: 125%;}
+*,
+*:before,
+*:after{box-sizing:inherit;}
+
+@media (max-width: 320px){
+    html {font-size: 100%;}
+}
+@media (min-width: 320px) and (max-width: 340px) {
+    html {font-size: 125%;}
+}
+@media (min-width: 340px) and (max-width: 360px) {
+    html {font-size: 132.82%;}
+}
+@media (min-width: 360px) and (max-width: 380px) {
+    html {font-size: 140.62%;}
+}
+@media (min-width: 380px) and (max-width: 400px) {
+    html {font-size: 148.44%;}
+}
+@media (min-width: 400px) and (max-width: 420px) {
+    html {font-size: 156.26%;}
+}
+@media (min-width: 420px) and (max-width: 440px) {
+    html {font-size: 164.06%;}
+}
+@media (min-width:440px) and (max-width: 640px) {
+    html {font-size: 171.88%;}
+}
+body,ul,dl,dt,dd,li,img,input,p,h1,h2,h3,h4,h5,h6,section{padding:0;margin: 0;}
+ul,dl,ol{list-style: none;}
+
+.col-12,.w-12{width:100%;}
+.col-11,.w-11{width:91.6666%;}
+.col-10,.w-10{width:83.3333%;}
+.col-9,.w-9{width:75%;}
+.col-8,.w-8{width:66.6666%;}
+.col-7,.w-7{width:58.3333%;}
+.col-6,.w-6{width:50%;}
+.col-5,.w-5{width:41.6666%;}
+.col-4,.w-4{width:33.3333%;}
+.col-3,.w-3{width:25%;}
+.col-2,.w-2{width:16.6666%;}
+.col-1,.w-1{width:8.3333%;}
+.col-1,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9,.col-10,.col-11,.col-12{float:left;}
+
+body{padding:0;margin:0;font-family:Microsoft YaHei, arial, verdana;background-color:#fff;color:#444;box-sizing:border-box;}
+img{display: inline-block;box-sizing:content-box;}
+input,textarea,a,button,img{-webkit-appearance:none;outline: none;}
+button{font-family:Microsoft YaHei, arial, verdana;border:none;width: 100%;display: block;text-align: center; }
+button:focus,button:active{outline: none;}
+
+.hide{display:none;}
+.center{text-align:center}
+.color-orange{color:#fbb416;}
+.padding-w{padding:0 .8rem;}
+.border-top{border-top: 1px solid #e0e0e0;}
+.bgcolor{background-color: #e6e6e6;}
+.text-red{color: #f54c47;font-style: normal;}
+
+.btn{
+    display:inline-block;
+    text-align: center;
+    font-size:.7rem;
+    line-height:1;
+    padding:.5rem 1rem;
+    border-radius:.15rem;
+    color:#fff;
+    background-color:#ddd;
+}
+
+.btn-yellow{.btn-function(#fff;#ffbc1c);}
+.btn-gray{.btn-function(#fff;#ccc);}
+.btn-cancle{.btn-function(#fff;#e6e6e6);}
+.btn-red{.btn-function(#fff;#f54c47);}
+.btn-white{.btn-function(#333;#fff);border-color:#ccc}
+
+.text-lg{font-size: 1.2rem;font-style: normal;}
+.text-big{font-size: 1rem;font-style: normal;}
+.text-md{font-size: .8rem;font-style: normal;}
+.text-sm{font-size: .6rem;}
+.fright{float: right;}
+.clearfix:before,
+.clearfix:after{content: "";display: table;}
+.clearfix:after{clear: both;}
+.clearfix{*zoom:1;}
+
+a,a:hover{text-decoration: none;}
+section{width: 100%;margin: 0 auto;color:#999;line-height: 1.5;overflow: hidden;}
+a,button,input,textarea{
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+//火理财--如何投资、如何充值、如何提现、如何使用火券加息--流程图
+.hlc-bg{background-color: #e6e6e6;}
+.hlc{background-color:#fff;margin-bottom: 1.2rem;padding:.8rem;}
+.hlc-bg dl:first-child dt{color: #333;}
+.hlc dt h2{font-size:.9rem;color: #333;}
+.hlc dt p{font-size:.7rem;color: #666;margin-bottom:1rem;/* line-height: 1rem; */  }
+.hlc dd{margin:0 auto;}
+.hlc dd img{width: 46%;display: inline-block;}
+.hlc dd img:first-child{margin-right:4%;}
+
+//火理财--帮助中心
+
+.help-part{border-top: 1px solid #d2d2d2;border-bottom: 1px solid #d2d2d2;margin-bottom: .8rem;padding:.8rem;background-color:#fff;position: relative;}
+.help-part:active{background-color: #e6e6e6;border-color: #e6e6e6;}
+.help-part .iconfont{font-size: 2rem;display: inline-block;vertical-align: top;}
+.help-part .icon-touzi{color: #5acdc5;}
+.help-part .icon-tixian{color: #f1bf11;}
+.help-part .icon-qian{color: #4282ae;}
+.help-part .icon-duihuan1{color: #ffa200;}
+.help-part .icon-11{color: #586373;}
+.help-part .icon-suo{color: #ef6c72;}
+.help-part .icon-guanyu{color: #ef6c72;}
+.help-part .icon-youjiantou{color: #c8c8c8;position: absolute;right: .8rem;top: 50%;margin-top: -.41rem;font-size: .82rem;}
+.help-part .content{display: inline-block;padding: 0 .5rem;width: 76%;}
+.help-part .content dt h2{line-height: 2rem;font-size:.8rem;color: #333;font-weight: normal;}
+.help-part .content dd{font-size: .7rem;color: #666;}
+.help-part:last-child{margin-bottom:0; }
+.help-part .next-arrow{top: 1.8rem;}
+
+//火理财--我的火券
+.tickets{padding:3rem .8rem 4rem;text-align: center;}
+.tickets h2{font-size: 1.4rem;color: #333;text-align: center;}
+.tickets .smile{width:8rem;display: inline-block;margin:1rem auto; }
+.tickets .false{width:9rem;display: inline-block;margin:1rem auto; }
+.tickets p{font-size:.8rem;color:#666; }
+.desk{width: 100%;height: 100%;position: fixed;top: 0;left: 0;background: rgba(0,0,0,.3);display: none;right: 0;bottom:0;}
+.tickets .modals{background-color: #e6e6e6;width: 90%;display:block;position: fixed;left: 5%;bottom:0;z-index: 99;border-radius: .2rem .2rem 0 0;}
+.tickets .modals .links{border-bottom:1px solid #d2d2d2;padding:0 .8rem;}
+.tickets .modals .links a{display: inline-block;color: #999;font-size: 1rem;text-align: center;padding:2.2rem 0 1rem;width:45%;margin:0 auto;}
+.tickets .modals .links i{width:5rem;height: 5rem;display: inline-block;}
+.tickets .modals .links i.weixin{background: url(../images/app-view/hlc/weixin.png) no-repeat;}
+.tickets .modals .links i.friends{background: url(../images/app-view/hlc/friends.png) no-repeat;}
+.tickets .modals .links em{display: block;font-style: normal;margin-top: .5rem;}
+
+
+
+//还未获得我的火券--火理财
+.use-ticket{width: 100%;background-color:#e6e6e6;padding-top: 1rem; }
+.ticket-title{background-color: #fff;overflow: hidden;font-size: 0.8rem;color: #333;padding:.6rem .8rem;position: relative;}
+.ticketicon{padding-left: 1.4rem;width: 1rem;height: 1rem;vertical-align: middle;background: url(../images/app-view/hlc/ticketicon.png) no-repeat;background-size: 1rem;-webkit-background-size:1rem;}
+.next-arrow{width: 2rem;height: 2rem;vertical-align: middle;background: url(../images/app-view/hlc/arrow.png) no-repeat;background-size: 1rem;-webkit-background-size:1rem;position: absolute;top: 50%;margin-top: -.5rem;right: 0}
+.use-ticket .content{min-height: 30rem;text-align: center;color: #999;}
+.use-ticket .content img{display:block;margin:2rem auto 1.4rem;width: 9rem;}
+.use-ticket .content .text-md{font-size: .9rem;}
+
+
+
+//我的火券 列表--火理财
+.uses-ticket{width: 100%;background-color:#fff;}
+.uses-ticket .ticket-title{border-bottom: 1rem solid #e6e6e6;}
+.uses-ticket .loading{text-align: center;font-size: .7rem;padding: .3rem 0;color: #666;width: 100%;}
+.uses-ticket .ticket-list{background-color: #fff;padding:.4rem .8rem 0;color: #fff;font-size: .7rem;display: none;}
+.uses-ticket .list-show{display: block;}
+.ticket-list a{color: #fff;}
+.uses-ticket .tab {
+    background-color: #fff;
+    color: #f4524d;
+    font-size: .7rem;
+    letter-spacing: 2px;
+    overflow: hidden;
+    text-align: center;
+    padding:1rem 2.5rem 0;
+}
+.uses-ticket .tab span {
+    width: 49%;
+    float: left;
+    border: 1px solid #f4524d;
+    padding:.3rem 0;
+    &:nth-child(1){
+        border-top-left-radius:.2rem;
+        border-bottom-left-radius:.2rem;
+        &.select{
+            background-color: #f4524d;
+            border-top-left-radius:.2rem;
+            border-bottom-left-radius:.2rem;
+        }
+    }
+    &:nth-child(2){
+        border-top-right-radius:.2rem;
+        border-bottom-right-radius:.2rem;
+         &.select{
+            background-color: #f4524d;
+            border-top-right-radius:.2rem;
+            border-bottom-right-radius:.2rem;
+        }
+    }
+}
+.uses-ticket .tab span.select {
+    color: #fff;
+    background-color: #f4524d;
+}
+.uses-ticket .ticket-content{
+    padding: .8rem 0 0;
+    clear: both;
+}
+.day-ticket {
+    width: 94%;
+    display: block;
+    background:  url(../images/app-view/hlc/gray01.png) no-repeat center top;
+    background-size: contain;
+    -webkit-background-size: contain;
+    padding: .6rem;
+    margin: 0 auto .2rem;
+}
+.month-ticket {
+    width: 94%;
+    display: block;
+    background:  url(../images/app-view/hlc/gray02.png) no-repeat center top;
+    background-size: contain;
+    -webkit-background-size: contain;
+    padding: .6rem;
+    margin: 0 auto .2rem;
+}
+.has-used {
+    width: 94%;
+    display: block;
+    background:  url(../images/app-view/hlc/gray03.png) no-repeat center top;
+    background-size: contain;
+    -webkit-background-size: contain;
+    padding: .6rem;
+    margin: 0 auto .2rem;
+    & .inner-rt {
+        margin-top: 1.5rem;
+    }
+}
+.ticket-inner {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+}
+.ticket-inner label {
+    padding: .1rem .2rem;
+    margin-left: .2rem;
+    margin-top: .5rem;
+    font-size: .6rem;
+    border-radius: .2rem;
+    background: rgba(255,255,255,.6);
+}
+.color-red {
+    color: #ef5243;
+}
+.color-yellow {
+    color: #ffb600;
+}
+.color-grey {
+    color: #bcbcbc;
+}
+.inner-md {
+    height: 100%;
+    border-right: 1px dashed #fff;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 1rem;
+    margin-top: -.6rem;
+    padding-top: .6rem;
+}
+.inner-md .time {
+    font-size: .6rem;
+    display: block;
+}
+.increase {
+    font-size: 1.2rem;
+    display: block;
+}
+.increase strong {
+    font-size: 2rem;
+    font-weight: normal;
+}
+.increase em {
+    font-size: 1.5rem;
+    font-style: normal;
+}
+.inner-rt {
+    text-align: center;
+    font-size: .7rem;
+    display: block;
+    margin:1rem auto;
+}
+.ues-time {
+    font-size: .6rem;
+    font-style: normal;
+}
+.uses-ticket .modals {display: none;position: fixed;top: 5rem;left:8%;text-align: center;background-color: #f6f6f6;width: 84%;border-radius: .2rem;z-index: 99;}
+.uses-ticket .modals p{text-align: center;margin-top: 1rem;margin-bottom: 1rem;color: #666;}
+.uses-ticket .modals a.btn-white{color: #333;}
+.uses-ticket .modals .btnlink{padding: 0 1rem 1rem;}
+
+//活动--火理财
+.actives-bg{}
+.actives-bg header{width: 100%;padding:.7rem;font-size: .7rem;color: #666;box-sizing:border-box;}
+.actives-bg header span{display: inline-block;text-align: center;box-sizing:border-box;}
+.actives-bg header span span{font-size:1.4rem;}
+.actives-bg header span.signNum{border-right: 1px solid #d2d2d2;}
+
+.actives-bg b{font-size: .7rem;font-style: normal;font-weight: normal;}
+.actives-bg .content{border-top: 1px solid #d2d2d2;padding:1.2rem .8rem;text-align: center; }
+.actives-bg .content p{font-size: .7rem;}
+.actives-bg .content em{color: #666;}
+.actives-bg .signPic{width:100%;padding-bottom: 1rem;line-height:100%;position:relative;text-align:center}
+.actives-bg .signPic img{width:70%;}
+.actives-bg .signPic .signtext{display:inline-block;width:60%;height:70%;position:absolute;left:20%;top:10%;font-size:1.2rem;
+    vertical-align:baseline;font-style:normal}
+.actives-bg .signPic .signtext span{position:absolute;left:0;width:100%;bottom:0;text-align:center;padding:1.2rem 0;}
+.actives-bg .btn-cancle{background-color: #fff;}
+.actives-bg .modals{position: fixed;top:5rem;left: .8rem;border-radius: .2rem;background-color:#f6f6f6;text-align: center;width: 90%;overflow: hidden;padding-top:1rem;display: none;z-index: 99; }
+.go-download{width: 100%;padding: .5rem 0;display: block;color: #333;border-top: 1px solid #d2d2d2;}
+.sucess{display: none;}
+.flase{display: none;}
+.actives-bg .modals img{display: inline-block;width: 4rem;}
+.actives-bg .modals p{padding-bottom: .4rem;}
+.actives-bg .modals .text-lg{color: #333;}
+.actives-bg .modals .text-md{color: #666; }
+.actives-bg .modals .btn-white{border-top:1px solid #d2d2d2;width: 100%;}
+
+
+//火理财--随时提现/本息保障/如何投资
+.blue-border{border:1px solid #50839c !important;}
+.green-border{border:1px solid #43af98 !important;}
+.article{margin:2rem auto;}
+.article img{width:6rem;display: block;margin:2rem auto; }
+.article .advise{padding:3.4rem .8rem .8rem;border:1px solid #e95f55;font-size: .8rem;color: #333;border-radius: .2rem;line-height:1.2rem;margin-top: -4rem;overflow: hidden;text-align:justify;}
+.article .advise li{margin-bottom: .6rem;clear: both;overflow: hidden;}
+.article .advise li i{width: 1rem;height: 1.5rem;background: url(../images/app-view/hlc/logo.png) no-repeat;display: inline-block;vertical-align: middle;padding-right: 1.8rem;float: left;}
+.article .advise li span{float: left;width: 84%;}
+
+//为什么选择火理财
+.introduce{width: 100%;}
+.introduce img{width: 100%;display: inline-block;}
+.introduce .text-red{color: #fa3a11;}
+.introduce .part1{padding:1rem .4rem;background:url(../images/app-view/hlc/whybg_02.png) no-repeat;background-size: cover;}
+.introduce .part2{background: url(../images/app-view/hlc/whybg_03.png) no-repeat left bottom #f2f2f2;padding-top: 2rem;padding-bottom: 3rem;background-size: contain;-webkit-background-size: contain; }
+.introduce .part3{background: url(../images/app-view/hlc/whybg_04.png) no-repeat right bottom #fff;height: auto; padding-top: 1.5rem;padding-bottom: 3rem;background-size: contain;-webkit-background-size: contain; }
+.introduce .part4{background: url(../images/app-view/hlc/whybg_05.png) no-repeat center bottom #f2f2f2;height: auto; padding-top: 1.2rem;padding-bottom: 3.4rem;background-size: contain;}
+.introduce .part1 .part-left{width: 25%;margin-left: 7%;}
+.introduce .part1 .part-right{font-size: .7rem;color: #fff;font-weight: normal;vertical-align: top;padding-left: 7%;}
+.introduce .part1 .part-right li{margin-bottom: .1rem;}
+.introduce .part1 .part-right li i{width:.8rem;height: 1rem;background: url(../images/app-view/hlc/circle.png) no-repeat;background-size:contain;-webkit-background-size: contain;display: inline-block;vertical-align: middle;margin-right: .4rem; }
+.introduce .part-left{width: 30%;text-align: left;display: inline-block;}
+.introduce .part-right{display: inline-block;}
+.introduce .part2 .part-left{width: 38%;}
+.introduce .part2 .part-right{margin-left: 3%;padding-left: 0;}
+.introduce .part3 .part-right{display: inline-block;padding-left: 0;}
+.introduce .part3 .part-left{margin-left: 7%;width: 40%;}
+.introduce .part4 .part-left{width: 42%;}
+.introduce .part4 .part-right{margin-left: 5%;padding-left: 0;}
+.introduce .text{font-size: .7rem;line-height: 1.2rem;}
+.introduce .text .text-red{color:#fa3a11; }
+.introduce .text li:first-child{font-size: 1rem;margin-bottom: .3rem;}
+.introduce .text .center{padding-left: 2.4rem;}
+
+
+
+//问题反馈 -- 火理财
+.questions{width: 100%;background-color:#e6e6e6; }
+/* .questions .content{} */
+.questions textarea{width: 100%;min-height: 10rem;background-color: #fff;padding:.5rem;color:#999;font-size: .7rem;margin: 1.5rem auto .8rem;outline: none;display: block;border:1px solid #d2d2d2; border-radius: .15rem;}
+.questions .btn-red{letter-spacing: .4rem;background-color: #f43e38;border-color: #f43e38;font-size: .75rem;}
+.questions{
+    .modals{
+        width:90%;
+        overflow: hidden;
+        position: fixed;
+        height: 10rem;
+        top: 20%;
+        left: 5%; 
+        display: none;
+        background-color: #fff;
+        border-radius: .4rem;
+        z-index: 99;
+        h2{
+            width: 100%;
+            padding: .75rem 0 .8rem;
+            letter-spacing: 3px;
+            font-weight: normal;
+            border-bottom: 1px solid #d2d2d2;
+            color: #666;
+            font-size: .8rem;
+            text-align: center;
+            background-color: #f5f5f5;
+            border-top-radius: .4rem;
+        }
+        .content{
+            padding: .8rem .6rem 1rem;
+            p{
+                color: #666;
+                font-size: .7rem;
+                text-align: center;
+                span{
+                    margin-right: .5rem;
+                }
+            }
+        }
+        
+    }
+    .desktop{
+            z-index: 10;
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.54);
+    }
+}
+.questions .result{font-size: .6rem;color: red;padding-top: .5rem;position: absolute;top: 0;}
+
+//帮助中心的子页面 -- 文本内容 --火理财
+
+.help-list a {color: #333;}
+.help-list dl{border-bottom: 1px dashed #e5e5e5;margin-bottom: 0;position: relative;letter-spacing: 1px;}
+.help-list dl:first-child{color: #333;}
+.help-list .hlc dt h2,.help-list .hlc dt{font-size:.9rem;color: #333;margin-bottom: .3rem;}
+.help-list .hlc dd p,.help-list .hlc dd{font-size:.7rem;color: #666;margin-bottom:.2rem;text-align:justify;/* line-height: 1.4em; */  }
+.help-list .hlc dd .text-sm{font-size: .6rem;}
+
+
+
+//notfound 错误页面
+.error{background-color: #f0f0f0;padding-top: 4rem;width: 100%;height: 100%;}
+.error .content{width: 10rem;height: 20rem;margin:4rem auto;text-align: center;background: url(../images/app-view/hlc/404.png) no-repeat;background-size: contain;padding-top: 8rem;color: #333;}
+
+
+//关于我们
+.aboutus{width: 100%;height: 100%;background-color:#e6e6e6;overflow: hidden; }
+.aboutus .info{padding:1rem 0 1.5rem;background-color: #fff;border-top:1px solid #c2c2c2;border-bottom:1px solid #c2c2c2;margin-bottom: 1rem;}
+.aboutus .info h2{font-size: 1rem;color: #333;font-weight: normal;padding-left: .8rem;padding-right: .8rem;}
+.aboutus .info p,.aboutus .info dd{color:#666;font-size: .7rem;letter-spacing: 1px;padding-left: .8rem;padding-right: .8rem;text-align: justify; }
+.aboutus .info dl{border-bottom:1px solid #c2c2c2;overflow: hidden;padding:1rem 0 .8rem .8rem; }
+.aboutus .info dl:last-child{border-bottom: none;}
+.aboutus .info dt{float: left;width: 40%;border:1px solid #de2126;border-radius: .2rem;padding:.4rem .2rem;text-align: center;height: 4rem;line-height: 4rem;}
+.aboutus .info dt img{width: 80%;display: inline-block;}
+.aboutus .info dd{padding-left: 45%;}
+.aboutus .info dt.minsheng{border-color: #004c97;}
+.aboutus .info dt.veri{border-color: #cf0037;}
+
+
+//联系我们
+.contact{background-color: #f0f0f0;min-height: 30rem;}
+.contact dl{background-color: #fff;border-bottom:1px solid #c2c2c2;overflow: hidden;padding:.8rem;display: -webkit-box;-webkit-box-orient: horizontal;-webkit-box-pack: center;-webkit-box-align: center;box-orient: horizontal;box-pack: center;box-align: center;}
+.contact dt{width:2rem;height: 2rem;text-align: center;}
+.contact dt.tel{color:#35b3ed;font-size:1.3rem;}
+.contact dt.wx{color:#86c610;font-size:1.3rem;}
+.contact dt.wb{color:#dc2b21;font-size:1.5rem;}
+.contact dt.email{color:#ff4e00;font-size:1.3rem;}
+.contact dd{font-size:.8rem;color:#333;margin-left:0.25rem;-webkit-box-flex: 1;}
+.contact dd a{font-size:.8rem;color:#333;}
+
+//新闻信息
+.information{background-color: #fff;min-height: 30rem;letter-spacing: 1px;}
+.information .title{width: 100%;padding:.7rem .8rem;border-bottom: 1px solid #c2c2c2;}
+.information .title h2{color: #333;font-size: 1rem;font-weight: normal;}
+.information .date{font-size:.6rem;color: #999; }
+.information .content{padding:.8rem;}
+.information .content p{color:#333;font-size: .7rem;margin-bottom: 2rem;letter-spacing: 2px; }
+
+
+.mt-md{margin-top:1rem;}
+.mb-md{margin-bottom:1rem;}
+.icon-arr-right{display:inline-block;width:13px;height:15px;background:url(../images/app-view/hlc/arrow.png) no-repeat left top;background-size:100%;position:absolute;right:.5rem;top:1.2rem;}
+.actives-bg header span.profitNum{}
+.actives-bg header span.profitNum a{display:inline-block;width:100%;position:relative;color:#666;}
+.font-big{font-size:.9rem!important;}
+.text-green{color:#33cc33!important;}
+
+
+//手机端专题页
+.container{width: 100%;height: 100%;position: absolute;left: 0;top: 0;}
+.page{
+    position: relative;
+    padding-top: 1rem;
+}
+.page .h2{
+    text-align: center;
+    color: #fff;
+    font-size: .6rem;
+    padding: .8rem 0;
+    font-weight: normal;
+    strong {
+        font-size: 1.15rem;
+        font-weight: normal;
+    }
+}
+.pabsition {
+        position:absolute;
+        display: block;
+    }
+.page0{width: 100%;background:url(../images/app-view/hlc/active/welbg.png) no-repeat center bottom #061c33;background-size: cover;padding-top: 2.5rem;position: relative;/* height: 100%; */overflow: hidden;}
+.page0 .qnumber{position: absolute;text-align: center;font-size: .6rem;color: #fff;opacity: .7;top: .2rem;left: .8rem;}
+.page0 .logo{margin:1rem auto .8rem;width:6.4rem;height: 2.3rem;background:url(../images/app-view/hlc/active/logo-m.png) no-repeat center top;background-size: contain;  }
+.page0 .title{margin:0 auto 7rem;width:13.4rem;height: 4rem;background:url(../images/app-view/hlc/active/title-m.png) no-repeat center top;background-size: contain;  }
+.page0 .links{margin:0 auto;width: 74%;}
+.page0 .links a{width:100%;height: 2.2rem;background: rgba(175,185,209,.5);border-radius: 1.1rem;text-align: center;color: #fff;font-size: .7rem;display: block;line-height: 2.2rem;margin-bottom: 1rem;}
+.page0 .links i{margin-right: .5rem;width: 1.2rem;height: 1.8rem;display: inline-block;background-color: #ccc;vertical-align: middle;}
+.page0 .links .iphone{background:url(../images/app-view/hlc/active/iphone.png) no-repeat center top;background-size: contain;}
+.page0 .links .android{width: 1.4rem;height: 2rem;background:url(../images/app-view/hlc/active/android.png) no-repeat center top;background-size: contain;}
+
+.circle{
+    width: .3rem;
+    height: .3rem;
+    border-radius: .15rem;
+    background-color: #fdd000;
+    display: inline-block;
+    vertical-align: middle;
+}
+.page1{
+    background-color: #ff5252;
+    width: 100%;/* 
+    height: 100%; */
+    overflow: hidden;
+    .phone-content{
+        background:url(/static/images/app-view/hlc/active/app/hlc-app05.png) no-repeat center bottom;
+        margin: 0 auto;
+        width: 12.5rem;
+        height: 19.5rem;
+        background-size: 100%;
+        /* position: absolute;
+        bottom: 0;
+        left: 50%;
+        margin-left: -6.25rem; */
+    }
+    .circle01 {
+        background: url(/static/images/app-view/hlc/active/app/hlc-app062.png) no-repeat;
+        top: 2.8rem;
+        left: .4rem;
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+    .circle02 {
+        background: url(/static/images/app-view/hlc/active/app/hlc-app061.png) no-repeat;
+        top: .9rem;
+        right: .0;
+        width: 2.5rem;
+        height: 4.25rem;
+    }
+    .circle03 {
+        background: url(/static/images/app-view/hlc/active/app/hlc-app063.png) no-repeat;
+        bottom: 0;
+        left: .0;
+        width: 3rem;
+        height: 3.75rem;
+    }
+    .circle04 {
+        background: url(/static/images/app-view/hlc/active/app/hlc-app064.png) no-repeat;
+        bottom: 1.7rem;
+        right: 0;
+        width: 1.4rem;
+        height: 3rem;
+    }
+}
+
+.page2{
+    background-color: #ffffde;
+    width: 100%;/* 
+    height: 100%; */
+    overflow: hidden;
+    .h2{
+        color: #f54c47;
+    }
+}
+.rate-content{
+    width: 13.5rem;
+    height: 18rem;
+    margin: 1rem auto 0;
+    margin-right: .5rem;
+    background: url(/static/images/app-view/hlc/active/app/hlc-app02.png) no-repeat;
+    background-size: 100%;
+}
+.rate01{
+    top: 1.4rem;
+    left: .2rem;
+    width: 5rem;
+    height: 5rem;
+    background: url(/static/images/app-view/hlc/active/app/hlc-app03.png) no-repeat;
+    background-size: 100%;
+}
+.rate02{
+    bottom: .2rem;
+    right: .1rem;
+    width: 6.5rem;
+    height: 4rem;
+    background: url(/static/images/app-view/hlc/active/app/hlc-app04.png) no-repeat;
+    background-size: 100%;
+}
+.page3{
+    background-color: #73d6b5;
+    width: 100%;
+}
+.width-content {
+    padding-bottom: 1rem;
+}
+
+.rate-img{
+    width: 13rem;
+    height: 14rem;
+    display: block;
+    margin: 0 auto;
+    background: url(/static/images/app-view/hlc/active/app/hlc-app08.png) no-repeat;
+    background-size: 100%;
+}
+.rate-info{
+    margin: 1.3rem 0 0 2.8rem;
+    color: #fff;
+    font-size: .8rem;
+}
+.rate-info li{
+    padding-bottom: .7rem;
+    i{
+        margin-right: .6rem;
+        vertical-align: middle;
+    }
+}
+.page4{
+    background-color: #35b3ed;
+    padding-bottom: 2rem;
+    width: 100%;/* 
+    height: 100%; */
+}
+.page4 .h2{
+    padding-bottom: 2rem;
+}
+.security-content{
+    font-size: .85rem;
+    position: relative;
+    z-index: 2;
+    span{
+        font-size: 2rem;
+        padding-right: .9rem;
+        display: inline-block;
+    }
+}
+.se{
+    background-color: #fff;
+    margin: 0 auto;
+    width: 13rem;
+    height: 5.7rem;
+    border-bottom: 1px solid #35b3ed;
+    position: relative;
+    span{
+        position: absolute;
+        top: 2rem;
+        left: 1rem;
+    }
+    ul{
+        padding-top: 2rem;
+        padding-left: 3.7rem;
+        i{
+            margin-right: .3rem;
+        }
+    }
+}
+.arrow01,.arrow02{
+    width: 0;
+    height: 0;
+    border-left: .8rem solid transparent;
+    border-right: .8rem solid transparent;
+    border-top: .8rem solid #35b3ed;
+    position: absolute;
+    left: 50%;
+    bottom: -.8rem;
+    margin-left: -.4rem;
+    z-index: 9;
+}
+.arrow02{
+    bottom: -.75rem;
+    border-top: .8rem solid #fff;
+    z-index: 10;
+}
+.se01{
+    color: #ffcf5c;
+    span{
+        color: #ffcf5c;
+    }
+    .circle{
+        background-color: #ffcf5c;
+    }
+}
+.se02{
+    color: #20baab;
+    span{
+        color: #73d6b5;
+    }
+    .circle{
+        background-color: #20baab;
+    }
+}
+.se03{
+    color: #fd866f;
+    .circle{
+        background-color: #fd866f;
+    } 
+}
+.securitybg01{
+    top: 2.6rem;
+    left: .4rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: url(/static/images/app-view/hlc/active/app/hlc-app11.png) no-repeat;
+    background-size: 100%;
+} 
+.securitybg02{
+    bottom: 1.1rem;
+    left: 0;
+    width: 5.5rem;
+    height: 11rem;
+    background: url(/static/images/app-view/hlc/active/app/hlc-app09.png) no-repeat;
+    background-size: 100%;
+}
+
+
+
+
+//输入暗号，获加息券---火理财
+.command{width: 100%;overflow: hidden;}
+.command-content{width: 100%;background:url(/static/images/coupon/wave11.png) center top;padding-top: 2rem;padding-bottom: 6rem;background-size: 100% auto;}
+.command-content h2{ height: 2rem;font-size:1.2rem;font-weight:normal;color:#ffbc1c;text-align:center}
+.command-content .code{width:80%;padding: .6rem 1rem;background-color: #fff;border: 1px solid #ffbc1c;border-radius: 2rem;color: #333;display: block;margin: 1rem auto;outline: none;font-size: 1.2rem;text-align:center;}
+.command-content .btn-yellow{width:75%;padding: .7rem 0;font-size: .8rem;letter-spacing: .25rem;}
+.footer{width: 100%;height: 14rem;background:url(/static/images/coupon/wave01.png) center top #fff6e4;background-size: 100% auto;}
+.command .modals{width: 90%;display:none;position: fixed;top:6rem;left: 5%;background-color: #fff;border-radius: .2rem;text-align: center;color: #333;border: 1px solid #d2d2d2; z-index: 99;overflow: hidden;}
+.command .modals .content{padding-bottom: .5rem;background-color: #fff;padding-top: 2rem;}
+.command .modals .content em{font-style: normal;}
+.command .modals .content .text-red{font-size: .7rem;}
+.command .modals .tips{font-size: 1rem; color: #b7b7b7;}
+.command .modals .text-md{font-size: .8rem;}
+.command .modals img{ width: 6rem;display: inline-block;}
+.command .modals .buttons{margin: 0 auto 1rem; color: #fff; background: #e7343a; letter-spacing: .5rem; width: 90%;text-align: center;height: 2rem;line-height:2rem; border-radius: 4px; }
+.command .modals .buttons span{text-align: center;display: inline-block;}
+.command .modals .cancle{width: 50%;border-right: 1px solid #d2d2d2;float: left; }
+
+
+
+//火理财信用卡充值
+.credit-bg{
+    background: #fff;
+    .tip-msg{
+        color: #fa3a11;
+        font-size: .6rem;
+        display: none;
+        position: absolute;
+    }
+
+    & h2{
+        text-align: center;
+        color: #333;
+        font-size: .7rem;
+        font-weight: normal;
+        padding-bottom: .625rem;
+    }
+    .ch6{
+        font-weight: normal;
+        text-align: center;
+        font-size: .6rem;
+        padding-top: 1rem;
+        padding-bottom: .45rem;
+        span{
+            color: #fa3a11;
+        }
+    }
+    & .figure{
+        padding: 0 .8rem;
+        input {
+            padding: .5rem .5rem;
+            width: 100%;
+            font-size: .75rem;
+            border: 1px solid #d2d2d2;
+            border-radius: .2rem;
+            outline: none;
+            font-family: Microsoft YaHei, arial, verdana;
+        }
+        p {
+            margin-top: .5rem;
+            text-align: right;
+            & i{
+                width: .7rem;
+                height: .7rem;
+                vertical-align: middle;
+                display: inline-block;
+                background: url(../images/app-view/hlc/credit/icon01.jpg) no-repeat;
+                background-size: contain;
+            }
+            & span{
+                color: #333;
+                margin-left: .4rem;
+                font-size: .6rem;
+                border-bottom: 1px solid #333;
+                cursor: pointer;
+            }
+        }
+    }
+    & .consent{
+        padding: 0 .8rem;
+        margin: 1.5rem 0 1rem;
+        font-size: .7rem;
+        & input, & b{
+            display: none;
+        }
+        & b{
+            width: .65rem;
+            height: .65rem;
+            outline: none;
+            display: inline-block;
+            border: 1px solid #b2b2b2;
+            border-radius: .1rem;
+        }
+        & .on{
+            background: url(../images/app-view/hlc/credit/icon02.jpg) no-repeat center;
+            background-size: contain;
+            }
+        & label span{
+            color: #fa3a11;
+            cursor: pointer;
+        }
+    }
+    & .recharge-link{
+        padding: 0 .8rem;
+        & .btn-red{
+            font-size: .75rem;
+            margin: .8rem 0 1.75rem;
+        }
+    }
+    & .tips{
+        font-size: .6rem;
+        color: #999;
+        dt{
+            width: 100%;
+            border-bottom: 1px solid #d2d2d2;
+            padding-left: .8rem;
+            padding-bottom: .45rem;
+            & i{
+                width: .7rem;
+                height: .7rem;
+                display: inline-block;
+                vertical-align: middle;
+                font-style: normal;
+                background: url(../images/app-view/hlc/credit/icon03.jpg) no-repeat;
+                background-size: contain;
+            }
+            & span{
+                padding-left: .48rem;
+            }
+        }
+        dd{
+            padding-right:.8rem;
+            color: #999;
+            padding-left: 2.1rem;
+            clear: both;
+            margin-bottom: .4rem;
+            & i{
+                width: 10px;
+                height: 10px;
+                float: left;
+                margin-top: .1rem;
+                margin-left: -1.2rem;
+                background-color: #ffab37;
+                display: inline-block;
+                border-radius: .3rem;
+                margin-right: .5rem;
+            }
+
+        }
+        .watch{
+            color: #333;
+            margin-top: 1rem;
+        }
+    }
+}
+.desk1{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+.table-bordered td{border:1px solid #ccc;}
+#rules,#limit{
+display:none;
+}
+.rules dl{
+    font-size: .6rem;
+    & dt{
+        font-size: .7rem;
+        padding-bottom: .4rem;
+    }
+    & dd{
+        margin-bottom: .4rem;
+    }
+}
+.limit {
+}
+.limit .bankinfo{
+    overflow-y: auto;
+}
+.limit h4{
+    font-size: .7rem;
+    font-weight: normal;
+    padding-bottom: .5rem;
+    margin-bottom: .2rem;
+}
+.limit em{
+    font-style: normal;
+    font-size: .6rem;
+}
+.limit table{
+    //border:1px solid #ccc;
+    font-size: .6rem;
+    & .division{
+        border-bottom: 1px dashed #ccc;
+    }
+    & td{
+        padding: .3rem;
+    }
+}
+//信用卡充值成功和失败
+.suc-credit{
+    text-align: center;
+    padding: 4rem .8rem;
+
+    & img{
+        width: 8rem;
+        display: inline-block;
+    }
+    & h4{
+        font-size: .7rem;
+        font-weight: normal;
+        color: #999;
+    }
+    & li{
+        display: inline-block;
+        width: 45%;
+        margin:1rem .2rem;
+    }
+}
+
+//integral-store
+.bodybg-gray{background:#ececec;}
+.decoration{font-size:.8rem}
+
+.store-head{height:3.5rem;box-sizing:border-box}
+.store-head *{vertical-align:middle}
+.store-head strong{font-size:1.1rem;}
+.store-status p{font-size:.7rem}
+.store-status .icon-decoration{width:98px;}
+
+.wrap-inner{border-bottom:1px solid #dcdcdf;background:#fff;}
+.padding-md{padding:1rem;}
+.padding-top-l{padding-top:3rem;}
+.padding-top-m{padding-top:1rem;}
+.padding-top-s{padding-top:.5rem;}
+
+
